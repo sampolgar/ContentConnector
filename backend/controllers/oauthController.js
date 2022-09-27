@@ -4,6 +4,16 @@
 // @route POST /oauth/token
 
 const setOauth = async (req, res) => {
+      //logging
+  const query = req.query;
+  console.log(JSON.stringify(req.query));
+
+  const headers = req.headers;
+  console.log(JSON.stringify(headers));
+
+  console.log("req.url ", JSON.stringify(req.originalUrl));
+
+  console.log("body: " + JSON.stringify(req.body));
     if (!req.body) {
         res.status(400);
         throw new Error("didn't receive body, check your request");

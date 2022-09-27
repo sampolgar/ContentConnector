@@ -5,6 +5,9 @@ const contentSchema = mongoose.Schema({
       type: String,
       required: true,
     },
+    parentId: {
+      type: String,
+    },
     mimeType: {
       type: String,
       required: true,
