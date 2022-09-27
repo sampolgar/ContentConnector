@@ -31,7 +31,6 @@ const setGoal = asyncHandler(async (req, res) => {
 // @desc Get Goal
 // @route GET /api/v1/goals/:id
 // @access Private
-
 const getGoal = asyncHandler(async (req, res) => {
   const goal = await Goal.findById(req.params.id);
   if (!goal) {

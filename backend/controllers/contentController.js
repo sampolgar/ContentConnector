@@ -6,24 +6,20 @@ const ContentResponse = require("../model/contentResponseModel");
 // @route GET /content
 const getContent = asyncHandler(async (req, res) => {
   const dbQuery = makeQuery(req.query);
-  let content = "";
-
-  //do an aggregate search if the user is searching
-  if (req.query.search) {
+  let content = ""
+  
+  if (req.query.search){
     content = await Content.aggregate([dbQuery]);
-    console.log("content 1" + content);
   } else {
     content = await Content.find(dbQuery);
-    console.log("content 2" + content);
   }
-
+  
   if (content.length > 0) {
     const contentResponse = await ContentResponse.create({
       contentCount: "1",
       offset: "0",
       content: content,
     });
-
     res.status(200).json(contentResponse);
   }
 });
@@ -58,14 +54,15 @@ function makeQuery(query) {
   }
   if (query.search) {
     dbQuery.$search = {
-      index: "default",
-      phrase: {
-        path: "name",
-        query: query.search,
-        slop: 5
-      },
+      wildcard: {
+        query: "*" + query.search + "*",
+        path: {
+          wildcard: "*",
+        },
+        "allowAnalyzedField": true
+      }
+    };
     }
-  }
   console.log("the query" + JSON.stringify(dbQuery));
   return dbQuery;
 }
