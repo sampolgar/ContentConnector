@@ -6,14 +6,15 @@ const ContentResponse = require("../model/contentResponseModel");
 // @route GET /content
 const getContent = asyncHandler(async (req, res) => {
   const dbQuery = makeQuery(req.query);
-  let content = ""
-  
-  if (req.query.search){
+
+  let content = "";
+
+  if (req.query.search) {
     content = await Content.aggregate([dbQuery]);
   } else {
     content = await Content.find(dbQuery);
   }
-  
+
   if (content.length > 0) {
     const contentResponse = await ContentResponse.create({
       contentCount: "1",
@@ -44,10 +45,33 @@ const setContent = asyncHandler(async (req, res) => {
   res.status(200).json(content);
 });
 
+//@desc getDownload
+//@route GET /content/:id
+const getDownload = asyncHandler(async (req, res) => {
+  const dbQuery = makeQuery(req.query);
+  const downloadObj = await Content.find(dbQuery)
+  console.log('downloadObj', JSON.stringify(downloadObj))
+
+  if (!downloadObj) {
+    res.status(400);
+    throw new Error("content not found");
+  }
+
+  let downloadUrlObj = {};
+  downloadUrlObj.downloadUrl = downloadObj.downloadUrl;
+  console.log("downloadUrl: " + downloadUrlObj);
+  res.status(200).json(downloadUrlObj);
+});
+
+//@desc db query formatter for query parameters
 function makeQuery(query) {
   let dbQuery = {};
+  if (query.id) {
+    dbQuery.id = query.id;
+  }
   if (query.parentId) {
-    dbQuery.parentId = query.parentId;
+    //use slice to change the parentId to just the parent e.g. change 101/102 => 102
+    dbQuery.parentId = query.parentId.slice(-3);
   }
   if (query.contentType) {
     dbQuery.mimeType = { $in: mapContentTypeToMimeTypes(query.contentType) };
@@ -59,10 +83,10 @@ function makeQuery(query) {
         path: {
           wildcard: "*",
         },
-        "allowAnalyzedField": true
-      }
+        allowAnalyzedField: true,
+      },
     };
-    }
+  }
   console.log("the query" + JSON.stringify(dbQuery));
   return dbQuery;
 }
@@ -70,7 +94,12 @@ function makeQuery(query) {
 function mapContentTypeToMimeTypes(contentType) {
   switch (contentType) {
     case "image":
-      return ["image/jpeg", "image/png", "image/svg+xml"];
+      return [
+        "application/vnd.templafy.folder",
+        "image/jpeg",
+        "image/png",
+        "image/svg+xml",
+      ];
     case "textElement":
       return [
         "application/vnd.openxmlformats-officedocument.wordprocessingml.document",
@@ -92,5 +121,6 @@ function mapContentTypeToMimeTypes(contentType) {
 
 module.exports = {
   getContent,
+  getDownload,
   setContent,
 };
