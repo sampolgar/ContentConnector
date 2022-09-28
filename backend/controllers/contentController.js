@@ -6,7 +6,6 @@ const ContentResponse = require("../model/contentResponseModel");
 // @route GET /content
 const getContent = asyncHandler(async (req, res) => {
   const dbQuery = makeQuery(req.query);
-
   let content = "";
 
   if (req.query.search) {
@@ -25,50 +24,21 @@ const getContent = asyncHandler(async (req, res) => {
   }
 });
 
-//@desc Set Content
-//@route POST /content
-const setContent = asyncHandler(async (req, res) => {
-  if (!req.body) {
-    res.status(400);
-    throw new Error("add content");
-  }
-
-  const content = await Content.create({
-    id: req.body.id,
-    parentId: req.body.parentId,
-    mimeType: req.body.mimeType,
-    previewUrl: req.body.previewUrl,
-    downloadUrl: req.body.downloadUrl,
-    name: req.body.name,
-    tags: req.body.tags,
-  });
-  res.status(200).json(content);
-});
-
 //@desc getDownload
 //@route GET /content/:id
 const getDownload = asyncHandler(async (req, res) => {
-  const dbQuery = makeQuery(req.query);
-  const downloadObj = await Content.find(dbQuery)
-  console.log('downloadObj', JSON.stringify(downloadObj))
-
-  if (!downloadObj) {
-    res.status(400);
-    throw new Error("content not found");
+  const dbQuery = { id: req.params.id };
+  let content = await Content.find(dbQuery);
+  if (content.length > 0) {
+    downloadObj = {downloadUrl: content[0].downloadUrl};
+    res.status(200).json(downloadObj);
   }
-
-  let downloadUrlObj = {};
-  downloadUrlObj.downloadUrl = downloadObj.downloadUrl;
-  console.log("downloadUrl: " + downloadUrlObj);
-  res.status(200).json(downloadUrlObj);
+  res.status(400);
+  throw new Error("no id found");
 });
 
 //@desc db query formatter for query parameters
 function makeQuery(query) {
-  let dbQuery = {};
-  if (query.id) {
-    dbQuery.id = query.id;
-  }
   if (query.parentId) {
     //use slice to change the parentId to just the parent e.g. change 101/102 => 102
     dbQuery.parentId = query.parentId.slice(-3);
@@ -87,10 +57,10 @@ function makeQuery(query) {
       },
     };
   }
-  console.log("the query" + JSON.stringify(dbQuery));
   return dbQuery;
 }
 
+// @desc map content type to mime types
 function mapContentTypeToMimeTypes(contentType) {
   switch (contentType) {
     case "image":
@@ -118,6 +88,26 @@ function mapContentTypeToMimeTypes(contentType) {
       return [];
   }
 }
+
+//@desc Set Content -- for testing only
+//@route POST /content
+const setContent = asyncHandler(async (req, res) => {
+  if (!req.body) {
+    res.status(400);
+    throw new Error("add content");
+  }
+
+  const content = await Content.create({
+    id: req.body.id,
+    parentId: req.body.parentId,
+    mimeType: req.body.mimeType,
+    previewUrl: req.body.previewUrl,
+    downloadUrl: req.body.downloadUrl,
+    name: req.body.name,
+    tags: req.body.tags,
+  });
+  res.status(200).json(content);
+});
 
 module.exports = {
   getContent,
