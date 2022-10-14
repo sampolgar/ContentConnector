@@ -4,6 +4,10 @@ Content Connector Modern
 npm run server for running nodemon
 Format = On Windows: Shift + Alt + F.
 
+Todo
+- [ ] upload content
+- [ ] 
+
 Tutorial
 https://www.digitalocean.com/community/tutorials/how-to-create-queries-in-mongodb
 https://www.digitalocean.com/community/tutorials/how-to-perform-full-text-search-in-mongodb

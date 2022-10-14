@@ -4,23 +4,60 @@ const ContentResponse = require("../model/contentResponseModel");
 
 // @desc Get Content
 // @route GET /content
+// const getContent = asyncHandler(async (req, res) => {
+//   console.log("hello 0");
+//   const dbQuery = makeQuery(req.query);
+//   let content = "";
+
+//   //if its a search query, we need to use the mongodb aggregate search, otherwise use the find
+//   if (dbQuery.$search) {
+//     content = await Content.aggregate([
+//       { $search: dbQuery.$search },
+//       { $match: dbQuery },
+//     ]);
+//   } else {
+//     content = await Content.find(dbQuery);
+//   }
+
+//   //if we receive content back, we need to map the content to the response model
+//   if (content.length > 0) {
+//     const contentResponse = await ContentResponse.create({
+//       contentCount: "1",
+//       offset: "0",
+//       content: content,
+//     });
+//     res.status(200).json(contentResponse);
+//   } else {
+//     res.status(404);
+//     throw new Error("Content not found");
+//   }
+// });
+
 const getContent = asyncHandler(async (req, res) => {
+  console.log("1");
   const dbQuery = makeQuery(req.query);
   let content = "";
 
   if (req.query.search) {
+    console.log("2");
     content = await Content.aggregate([dbQuery]);
   } else {
+    console.log("3");
     content = await Content.find(dbQuery);
   }
 
   if (content.length > 0) {
+    console.log("4");
     const contentResponse = await ContentResponse.create({
       contentCount: "1",
       offset: "0",
       content: content,
     });
+    console.log("5");
     res.status(200).json(contentResponse);
+  } else {
+    res.status(404);
+    throw new Error("Content not found");
   }
 });
 
@@ -30,7 +67,7 @@ const getDownload = asyncHandler(async (req, res) => {
   const dbQuery = { id: req.params.id };
   let content = await Content.find(dbQuery);
   if (content.length > 0) {
-    downloadObj = {downloadUrl: content[0].downloadUrl};
+    downloadObj = { downloadUrl: content[0].downloadUrl };
     res.status(200).json(downloadObj);
   }
   res.status(400);
@@ -38,29 +75,47 @@ const getDownload = asyncHandler(async (req, res) => {
 });
 
 //@desc db query formatter for query parameters
+// separate search query from other query
 function makeQuery(query) {
+  if (query.search) {
+    const query = makeSearchAggregateQuery(query);
+  } else {
+    const query = makeFindQuery(query);
+  }
+  return query;
+}
+
+function makeSearchAggregateQuery(query) {
+  dbQuery.$search = {
+    wildcard: {
+      query: "*" + query.search + "*",
+      path: {
+        wildcard: "*",
+      },
+      allowAnalyzedField: true,
+    },
+  };
+  return dbQuery;
+}
+
+function makeFindQuery(query) {
+  let dbQuery = {};
   if (query.parentId) {
     //use slice to change the parentId to just the parent e.g. change 101/102 => 102
+    console.log("6");
     dbQuery.parentId = query.parentId.slice(-3);
   }
   if (query.contentType) {
+    console.log("7");
     dbQuery.mimeType = { $in: mapContentTypeToMimeTypes(query.contentType) };
   }
-  if (query.search) {
-    dbQuery.$search = {
-      wildcard: {
-        query: "*" + query.search + "*",
-        path: {
-          wildcard: "*",
-        },
-        allowAnalyzedField: true,
-      },
-    };
-  }
+
+  console.log("9");
   return dbQuery;
 }
 
 // @desc map content type to mime types
+// e.g. Templafy sends us content type "image", we need to find all images in the form of image/jpeg, image/png, image/svg+xml
 function mapContentTypeToMimeTypes(contentType) {
   switch (contentType) {
     case "image":
