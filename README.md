@@ -13,7 +13,7 @@ https://www.digitalocean.com/community/tutorials/how-to-create-queries-in-mongod
 https://www.digitalocean.com/community/tutorials/how-to-perform-full-text-search-in-mongodb
 
 
-Supported query params
+# Supported query params
 /content/?skip=0&limit=30&contentType=image
 /content/?skip=0&limit=30&contentType=image&parentId=01
 /content/?skip=0&limit=30&contentType=image&parentId=01%2f02
@@ -21,6 +21,15 @@ Supported query params
 {"skip":"0","limit":"30","contentType":"image"}
 {"skip":"0","limit":"30","contentType":"image","parentId":"01/02"}
 {"skip":"0","limit":"30","contentType":"image","parentId":"01"}
+
+# MongoDB searches
+- count: https://www.mongodb.com/docs/atlas/atlas-search/counting/#std-label-count-ref
+- search: https://www.mongodb.com/docs/atlas/atlas-search/query-syntax/#std-label-query-syntax-ref
+- compound: https://www.mongodb.com/docs/atlas/atlas-search/compound/
+- find:
+- aggregate: 
+
+
 
 
 # sample cURL requests from Templafy to your Content Connector
@@ -207,4 +216,81 @@ console.log("req.url ", JSON.stringify(req.originalUrl))
 
 ### logging post form data
 console.log("body: "+JSON.stringify(req.body));
+
+# DB Queries
+- skip=0
+- limit=30
+- contentType=slide / image / textElement / slideElement / pdf
+- search=string
+- parentId=0 / 01 / 02 
+- contentId=0 / 01 / 02
+
+
+## Get all images - every request should query folders as well?
+```
+{
+   "mimeType":{
+      "$in":[
+         "application/vnd.templafy.folder",
+         "image/jpeg",
+         "image/png",
+         "image/svg+xml"
+      ]
+   }
+}
+```
+## Search Query
+- https://www.mongodb.com/docs/atlas/atlas-search/wildcard/
+```
+{
+   "$search":{
+      "wildcard":{
+         "query":"*food*",
+         "path":{
+            "wildcard":"*"
+         },
+         "allowAnalyzedField":true
+      }
+   }
+}
+```
+
+{
+   "$search":{
+      "wildcard":{
+         "query":"*food*",
+         "path":{ "wildcard":"*" },
+         "allowAnalyzedField":true
+      }
+   }
+},
+{
+   "mimeType":{
+      "$in":[
+         "application/vnd.templafy.folder",
+         "image/jpeg",
+         "image/png",
+         "image/svg+xml"
+      ]
+   }
+}
+
+//https://stackoverflow.com/questions/40251597/mongoose-search-query better search query
+
+
+//https://cloud.mongodb.com/v2/62e0c495c589fd236d6ab383#clusters/atlasSearch/Cluster0?collectionName=movies&database=sample_mflix&indexName=sample-movies&view=SearchTester
+[
+  {
+    '$search': {
+      'index': 'sample-movies',
+      'text': {
+        'query': '{     
+         $search: {       text: {         query: "baseball",         path: "plot",       },     },   },   {     $limit: 5,   },   {     $project: {       _id: 0,       title: 1,       plot: 1,     },   }',
+        'path': {
+          'wildcard': '*'
+        }
+      }
+    }
+  }
+]
 

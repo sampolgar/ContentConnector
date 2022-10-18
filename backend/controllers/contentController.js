@@ -37,6 +37,7 @@ const getContent = asyncHandler(async (req, res) => {
   console.log("1");
   const dbQuery = makeQuery(req.query);
   let content = "";
+  console.log("dbquery the" + JSON.stringify(dbQuery));
 
   if (req.query.search) {
     console.log("2");
@@ -61,31 +62,21 @@ const getContent = asyncHandler(async (req, res) => {
   }
 });
 
-//@desc getDownload
-//@route GET /content/:id
-const getDownload = asyncHandler(async (req, res) => {
-  const dbQuery = { id: req.params.id };
-  let content = await Content.find(dbQuery);
-  if (content.length > 0) {
-    downloadObj = { downloadUrl: content[0].downloadUrl };
-    res.status(200).json(downloadObj);
-  }
-  res.status(400);
-  throw new Error("no id found");
-});
-
-//@desc db query formatter for query parameters
-// separate search query from other query
 function makeQuery(query) {
+  console.log("11");
+  let dbQuery = {};
   if (query.search) {
-    const query = makeSearchAggregateQuery(query);
+    dbQuery = makeSearchAggregateQuery(query);
   } else {
-    const query = makeFindQuery(query);
+    console.log("12");
+    dbQuery = makeFindQuery(query);
   }
-  return query;
+  console.log("13");
+  return dbQuery;
 }
 
 function makeSearchAggregateQuery(query) {
+  let dbQuery = {};
   dbQuery.$search = {
     wildcard: {
       query: "*" + query.search + "*",
@@ -105,14 +96,32 @@ function makeFindQuery(query) {
     console.log("6");
     dbQuery.parentId = query.parentId.slice(-3);
   }
-  if (query.contentType) {
-    console.log("7");
-    dbQuery.mimeType = { $in: mapContentTypeToMimeTypes(query.contentType) };
-  }
+
+  dbQuery.mimeType = { $in: mapContentTypeToMimeTypes(query.contentType) };
 
   console.log("9");
   return dbQuery;
 }
+
+function getParentFolderId(contentId) {
+  return contentId.slice(0, -3);
+}
+
+//@desc getDownload
+//@route GET /content/:id
+const getDownload = asyncHandler(async (req, res) => {
+  const dbQuery = { id: req.params.id };
+  let content = await Content.find(dbQuery);
+  if (content.length > 0) {
+    downloadObj = { downloadUrl: content[0].downloadUrl };
+    res.status(200).json(downloadObj);
+  }
+  res.status(400);
+  throw new Error("no id found");
+});
+
+//@desc db query formatter for query parameters
+// separate search query from other query
 
 // @desc map content type to mime types
 // e.g. Templafy sends us content type "image", we need to find all images in the form of image/jpeg, image/png, image/svg+xml
@@ -147,25 +156,52 @@ function mapContentTypeToMimeTypes(contentType) {
 //@desc Set Content -- for testing only
 //@route POST /content
 const setContent = asyncHandler(async (req, res) => {
-  if (!req.body) {
+  console.log(req.body);
+  if (!isEmptyObject(req.body)) {
+    console.log("type " + typeof req.body);
+    Content.insertMany(req.body)
+      .then((result) => {
+        console.log("result: " + result);
+        res.status(200).json({ success: "new documents added!", data: result });
+      })
+      .catch((err) => {
+        console.log("err: " + err);
+        res.status(400).json({ error: err });
+      });
+  } else {
     res.status(400);
-    throw new Error("add content");
+    throw new Error("add content in body - must be an array of objects");
   }
+});
 
-  const content = await Content.create({
-    id: req.body.id,
-    parentId: req.body.parentId,
-    mimeType: req.body.mimeType,
-    previewUrl: req.body.previewUrl,
-    downloadUrl: req.body.downloadUrl,
-    name: req.body.name,
-    tags: req.body.tags,
-  });
-  res.status(200).json(content);
+const isEmptyObject = (obj) => {
+  console.log("hello");
+  console.log(Object.keys(obj).length === 0);
+  return Object.keys(obj).length === 0;
+};
+
+const isArray = (obj) => {
+  console.log(obj.isArray ? false : true);
+  return obj.isArray ? true : false;
+};
+
+// //@desc Delete Content -- for testing only
+// //@route POST /content
+const deleteContent = asyncHandler(async (req, res) => {
+  Content.deleteMany({})
+    .then((result) => {
+      console.log("result: " + result);
+      res.status(200).json({ success: "documents deleted!", data: result });
+    })
+    .catch((err) => {
+      console.log("err: " + err);
+      res.status(400).json({ error: err });
+    });
 });
 
 module.exports = {
   getContent,
   getDownload,
   setContent,
+  deleteContent,
 };

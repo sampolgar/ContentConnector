@@ -3,9 +3,11 @@ const mongoose = require("mongoose");
 const contentSchema = mongoose.Schema({
   id: {
     type: String,
-    required: true,
   },
   parentId: {
+    type: String,
+  },
+  fileFolderName: {
     type: String,
   },
   mimeType: {
@@ -21,6 +23,9 @@ const contentSchema = mongoose.Schema({
       "application/vnd.openxmlformats-officedocument.presentationml.presentation",
     ],
   },
+  mimeType: {
+    type: String,
+  },
   previewUrl: {
     type: String,
   },
@@ -29,7 +34,6 @@ const contentSchema = mongoose.Schema({
   },
   name: {
     type: String,
-    required: true,
   },
   tags: {
     type: String,
