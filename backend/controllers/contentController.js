@@ -1,29 +1,36 @@
 const asyncHandler = require("express-async-handler");
+const { restart } = require("nodemon");
 const Content = require("../model/contentModel");
 const ContentResponse = require("../model/contentResponseModel");
 
 // @desc Get Content
 // @route GET /content
 const getContent = asyncHandler(async (req, res) => {
-  console.log("hello 0");
-
-  const filter = { contentType: "image" };
-
-  let docs = await Content.aggregate([{ $match: filter }]);
-
-  let query = [
-    {
-      $match: {
-        contentType: "image",
-      },
-    },
-  ];
-
-  const content = await Content.aggregate(query);
-
-  // const query = await Content.find();
+  const dbQuery = makeQuery(req.query);
+  const content = await Content.find(dbQuery)
+    .skip(req.query.skip)
+    .limit(req.query.limit);
   res.status(200).json(content);
 });
+
+const makeQuery = (query) => {
+  const { contentType = "", parentId = "", search = "", ...unusedVars } = query;
+  //if search is empty, create the query based on the contentType and parentId
+  let dbQuery = {};
+  dbQuery.$and = [];
+
+  if (search) {
+    dbQuery.$text = { $search: `*${search}*` };
+  }
+  if (parentId) {
+    dbQuery.$and.push({ parentId: parentId.slice(-3) });
+  }
+  if (contentType) {
+    dbQuery.$and.push({ contentType: contentType });
+  }
+  //add folders in the DB query
+  return dbQuery;
+};
 
 //@desc Set Content -- for testing only, use to post content to the db
 //@route POST /content

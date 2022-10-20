@@ -2,42 +2,78 @@
 // "skip":"0","limit":"30","contentType":"image","parentId":"01/02"
 // "skip":"0","limit":"30","contentType":"image","parentId":"01"
 // https://mongoosejs.com/docs/api/aggregate.html
-const { Aggregate } = require("mongoose");
+//https://www.digitalocean.com/community/tutorials/how-to-create-queries-in-mongodb
 
-// Aggregate.match
-//used when we need to find content in a folder
-aggregate.match({
-  department: {
-    $in: ["sales", "engineering"],
-  },
+// contentType (string): Will specify what type of content is being requested. Possible values are image / textElement / slide / slideElement / pdf / emailElement
+// limit (integer): Limits the amount of items to return
+// skip (integer): Skip the first x items, used for paging
+// parentId (string, optional): Id of the parent of which to show content
+// search (string, optional): Content to search for, contains the users search string
+
+
+// returns everything
+const content = await Content.find();
+
+const content = await Content.find({
+  contentType: "image",
 });
 
-// search
-// https://www.mongodb.com/docs/atlas/atlas-search/tutorial/
-const res = await Model.aggregate().search({
-  text: {
-    query: "baseball",
-    path: "plot",
-  },
+//find images in a folder 103 (and all subfolders)
+const content = await Content.find({
+  $or: [{ contentType: "image", parentId: "103" }, { parentId: "103" }],
 });
 
-// handling paging
-aggregate.skip(10);
+//search for images in the base-level
 
-// handling count
-aggregate.count("userCount");
+//paging
+const contentCount = await Content.find({
+  $or: [{ contentType: "image", parentId: "103" }, { parentId: "103" }],
+}).limit(3);
 
-// "skip":"0","limit":"30","contentType":"image"
-aggregate.match({
-  contentType: {
-    $in: ["image"],
-  },
+//full text search
+const content = await Content.find({
+  $text: { $search: "*Burgundy*" },
 });
 
-query = [
-  {
-    $match: {
-      contentType: "image"
-    }
-  }
-]
+//search images in a folder
+const content = await Content.find({
+  $and: [{ parentId: "103" }, { contentType: "image" }],
+  $text: { $search: "*Burgundy*" },
+});
+
+//using skip and limit
+const content = await Content.find({
+  $and: [{ parentId: "103" }, { contentType: "image" }],
+  $text: { $search: "*Burgundy*" },
+})
+  .skip(7)
+  .limit(3);
+res.status(200).json(content);
+
+// skip":"0","limit":"30"
+//skip":"30","limit":"30"
+// searchHandler
+  const content = await Content.find({
+    $and: [{ parentId: "103" }, { contentType: "image" }],
+    $text: { $search: "*Burgundy*" },
+  })
+    .skip(7)
+    .limit(3);
+  res.status(200).json(content);
+
+
+  // findHandler
+    const content = await Content.find({{ parentId: "103" }, { contentType: "image" },
+    })
+      .skip(7)
+      .limit(3);
+    res.status(200).json(content);
+
+    let dbQuery = {};
+    dbQuery.
+    dbQuery.$text = {$search: "*Burgundy*"}
+
+    dbQuery.parentId = query.parentId.slice(-3);
+
+    // contentCount (integer): Total number of results
+    // offset (integer): Current offset

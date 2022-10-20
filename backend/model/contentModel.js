@@ -26,6 +26,9 @@ const contentSchema = mongoose.Schema({
   mimeType: {
     type: String,
   },
+  contentType: {
+    type: String,
+  },
   previewUrl: {
     type: String,
   },
