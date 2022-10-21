@@ -1,5 +1,7 @@
 # ContentConnector Modern
 
+this readme is a work in progress
+
 # Required query params
 
 /content/?skip=0&limit=30&contentType=image
