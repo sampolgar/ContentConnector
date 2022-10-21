@@ -1,36 +1,48 @@
 const asyncHandler = require("express-async-handler");
-const { restart } = require("nodemon");
 const Content = require("../model/contentModel");
-const ContentResponse = require("../model/contentResponseModel");
-const mongoose = require("mongoose");
 
 // @desc Get Content
 // @route GET /content
 const getContent = asyncHandler(async (req, res) => {
   console.log("req.url ", JSON.stringify(req.originalUrl));
 
-  const dbQuery = makeQuery(req.query);
+  //make the mongodb query - if no query params, return all content
+  req.query ? (dbQuery = makeQueryFromQueryParams(req.query)) : (dbQuery = {});
 
-  const totalQueryCount = await totalQueryCounter(dbQuery);
+  //get the total count of documents that match the query
+  const totalQueryCount = await getTotalQueryCount(dbQuery);
 
-  const currentQueryCount = await currentQueryCounter(dbQuery);
+  //get the query content from the DB
+  const content = await executeQuery(dbQuery);
 
-  const content = await mongoFinder(dbQuery);
+  //make the response to Templafy
+  let queryResponse = {};
+  if (content.length > 0) {
+    queryResponse = await makeResponse(
+      totalQueryCount,
+      req.query.skip,
+      content
+    );
+  } else {
+    queryResponse = await makeResponse(0, 0, []);
+  }
 
-  const offset = res.status(200).json(content);
+  //send the response to Templafy
+  res.status(200).json(queryResponse);
 });
 
-const makeQuery = (query) => {
+//make the mongoDB query from the query params
+const makeQueryFromQueryParams = (query) => {
   const { contentType = "", parentId = "", search = "", ...unusedVars } = query;
 
   let dbQuery = {};
   dbQuery.$and = [];
-  dbQuery.$or = [];
 
   if (search) {
     dbQuery.$text = { $search: `*${search}*` };
   }
   if (parentId) {
+    dbQuery.$or = [];
     dbQuery.$or.push({ parentId: parentId });
     dbQuery.$and.push({ parentId: parentId.slice(-3) });
   }
@@ -41,25 +53,51 @@ const makeQuery = (query) => {
   return dbQuery;
 };
 
-const mongoFinder = async (dbQuery) => {
+//execute the $find query with mongodb
+const executeQuery = async (dbQuery) => {
   const content = await Content.find(dbQuery)
     .skip(dbQuery.skip)
     .limit(dbQuery.limit);
   return content;
 };
 
-const currentQueryCounter = async (dbQuery) => {
-  
-}
-
-const totalQueryCounter = async (dbQuery) => {
+//get the contentCount by counting the document count that matches the query
+const getTotalQueryCount = async (dbQuery) => {
   const totalDocumentCount = await Content.countDocuments(dbQuery);
   return totalDocumentCount;
 };
 
-const makeResponse = (contentResponse) => {};
+//make the response to Templafy
+const makeResponse = (theContentCount, theOffset, theContent) => {
+  return {
+    contentCount: theContentCount,
+    offset: theOffset,
+    content: theContent,
+  };
+};
 
-//@desc Set Content -- for testing only, use to post content to the db
+//@desc getDownload
+//@route GET /content/:id
+const getDownload = asyncHandler(async (req, res) => {
+  const dbQuery = { id: req.params.id };
+  let content = await Content.find(dbQuery);
+  if (content.length > 0) {
+    downloadObj = { downloadUrl: content[0].downloadUrl };
+    res.status(200).json(downloadObj);
+  }
+  res.status(400);
+  throw new Error("no id found");
+});
+
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+//
+//
+//
+//                     Helper functions for building, not needed for Production
+//
+//
+//
+//@desc Set Content - send an array of objects into the database - the format must match the Content model in the model folder
 //@route POST /content
 const setContent = asyncHandler(async (req, res) => {
   console.log(req.body);
@@ -86,7 +124,7 @@ const isEmptyObject = (obj) => {
   return Object.keys(obj).length === 0;
 };
 
-// //@desc Delete Content -- for testing only
+// //@desc Delete Content
 // //@route POST /content
 const deleteContent = asyncHandler(async (req, res) => {
   Content.deleteMany({})
@@ -98,19 +136,6 @@ const deleteContent = asyncHandler(async (req, res) => {
       console.log("err: " + err);
       res.status(400).json({ error: err });
     });
-});
-
-//@desc getDownload
-//@route GET /content/:id
-const getDownload = asyncHandler(async (req, res) => {
-  const dbQuery = { id: req.params.id };
-  let content = await Content.find(dbQuery);
-  if (content.length > 0) {
-    downloadObj = { downloadUrl: content[0].downloadUrl };
-    res.status(200).json(downloadObj);
-  }
-  res.status(400);
-  throw new Error("no id found");
 });
 
 module.exports = {

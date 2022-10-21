@@ -1,3 +1,5 @@
+//Scratchboard for queries, need to convert to readme
+
 // // "skip":"0","limit":"30","contentType":"image"
 // // "skip":"0","limit":"30","contentType":"image","parentId":"01/02"
 // // "skip":"0","limit":"30","contentType":"image","parentId":"01"
