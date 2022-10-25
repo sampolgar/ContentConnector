@@ -2,6 +2,11 @@
 ## What is the Content Connector?
 [Templafy's Content Connector](https://support.templafy.com/hc/en-us/articles/4688349602077-How-to-build-a-Custom-Content-Connector-API-) is a server that receives requests from Templafy and responds with data/content to be displayed in the Templafy interface. This template is a sample server to receive requests from Templafy and respond accordingly.
 
+## Example
+In this example, the end-user is in PowerPoint and finds their content within the application. With 1 click they can insert additional slides and insert images directly into content controls with automatic cropping.
+https://user-images.githubusercontent.com/39210767/197703163-46b293e1-e7ef-434a-a422-ee4b548630c3.mp4
+
+
 ## How does the template work?
 [As noted here](https://support.templafy.com/hc/en-us/articles/4688349602077-How-to-build-a-Custom-Content-Connector-API-), Templafy needs the following 3 endpoints supported. This template includes the content format and required requests and responses to fully support its function.
 
@@ -21,14 +26,15 @@
 | `search`     | String    | Enables an end-user to search through your content. We recommend searching names and tags  |
 
 
-https://mongodb.com/
-
 
 # Required query params
 
 /content/?skip=0&limit=30&contentType=image
 /content/?skip=0&limit=30&contentType=image&parentId=01
 /content/?skip=0&limit=30&contentType=image&parentId=01%2f02
+
+
+https://mongodb.com/
 
 # sample cURL requests from Templafy to your Content Connector
 
