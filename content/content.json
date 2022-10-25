@@ -502,7 +502,7 @@
     "fileFolderName": "PDF",
     "mimeType": "application/pdf",
     "contentType": "pdf",
-    "previewUrl": "https://templafydownload.blob.core.windows.net/delivery/Integrations/ContentConnector-Images/content-is-everything-report.pdf",
+    "previewUrl": "https://templafydownload.blob.core.windows.net/delivery/Integrations/ContentConnector-Images/PDF%20Folder_Icon.svg",
     "downloadUrl": "https://templafydownload.blob.core.windows.net/delivery/Integrations/ContentConnector-Images/content-is-everything-report.pdf",
     "name": "content is everything",
     "tags": "content is everything"
@@ -513,7 +513,7 @@
     "fileFolderName": "PDF",
     "mimeType": "application/pdf",
     "contentType": "pdf",
-    "previewUrl": "https://templafydownload.blob.core.windows.net/delivery/Integrations/ContentConnector-Images/content-is-everything-report.pdf",
+    "previewUrl": "https://templafydownload.blob.core.windows.net/delivery/Integrations/ContentConnector-Images/PDF%20Folder_Icon.svg",
     "downloadUrl": "https://templafydownload.blob.core.windows.net/delivery/Integrations/ContentConnector-Images/content-is-everything-report.pdf",
     "name": "content is everything 2",
     "tags": "content is everything"
@@ -524,7 +524,7 @@
     "fileFolderName": "Word",
     "mimeType": "application/vnd.openxmlformats-officedocument.wordprocessingml.document",
     "contentType": "textElement",
-    "previewUrl": "https://templafydownload.blob.core.windows.net/delivery/Integrations/ContentConnector-Images/fake-resume.docx",
+    "previewUrl": "https://templafydownload.blob.core.windows.net/delivery/Integrations/ContentConnector-Images/Document%20Template.png",
     "downloadUrl": "https://templafydownload.blob.core.windows.net/delivery/Integrations/ContentConnector-Images/fake-resume.docx",
     "name": "First Last resume",
     "tags": "staff resume"
@@ -535,7 +535,7 @@
     "fileFolderName": "Word",
     "mimeType": "application/vnd.openxmlformats-officedocument.wordprocessingml.document",
     "contentType": "textElement",
-    "previewUrl": "https://templafydownload.blob.core.windows.net/delivery/Integrations/ContentConnector-Images/fake-resume.docx",
+    "previewUrl": "https://templafydownload.blob.core.windows.net/delivery/Integrations/ContentConnector-Images/Document%20Template.png",
     "downloadUrl": "https://templafydownload.blob.core.windows.net/delivery/Integrations/ContentConnector-Images/fake-resume.docx",
     "name": "Resume 2",
     "tags": "resume, employee"
@@ -546,7 +546,7 @@
     "fileFolderName": "Word",
     "mimeType": "application/vnd.openxmlformats-officedocument.wordprocessingml.document",
     "contentType": "emailElement",
-    "previewUrl": "https://templafydownload.blob.core.windows.net/delivery/Integrations/ContentConnector-Images/fake-resume.docx",
+    "previewUrl": "https://templafydownload.blob.core.windows.net/delivery/Integrations/ContentConnector-Images/Document%20Template.png",
     "downloadUrl": "https://templafydownload.blob.core.windows.net/delivery/Integrations/ContentConnector-Images/fake-resume.docx",
     "name": "Staff resume",
     "tags": "project, employee"
@@ -557,7 +557,7 @@
     "fileFolderName": "Word",
     "mimeType": "application/vnd.openxmlformats-officedocument.wordprocessingml.document",
     "contentType": "emailElement",
-    "previewUrl": "https://templafydownload.blob.core.windows.net/delivery/Integrations/ContentConnector-Images/fake-resume.docx",
+    "previewUrl": "https://templafydownload.blob.core.windows.net/delivery/Integrations/ContentConnector-Images/Document%20Template.png",
     "downloadUrl": "https://templafydownload.blob.core.windows.net/delivery/Integrations/ContentConnector-Images/fake-resume.docx",
     "name": "Resume 3",
     "tags": "staff resume"
@@ -568,7 +568,7 @@
     "fileFolderName": "PowerPoint",
     "mimeType": "application/vnd.openxmlformats-officedocument.presentationml.presentation",
     "contentType": "slide",
-    "previewUrl": "https://templafydownload.blob.core.windows.net/delivery/Integrations/ContentConnector-Images/blank-presentation.pptx",
+    "previewUrl": "https://templafydownload.blob.core.windows.net/delivery/Integrations/ContentConnector-Images/Presentation.svg",
     "downloadUrl": "https://templafydownload.blob.core.windows.net/delivery/Integrations/ContentConnector-Images/blank-presentation.pptx",
     "name": "",
     "tags": ""
@@ -579,7 +579,7 @@
     "fileFolderName": "PowerPoint",
     "mimeType": "application/vnd.openxmlformats-officedocument.presentationml.presentation",
     "contentType": "slide",
-    "previewUrl": "https://templafydownload.blob.core.windows.net/delivery/Integrations/ContentConnector-Images/blank-presentation.pptx",
+    "previewUrl": "https://templafydownload.blob.core.windows.net/delivery/Integrations/ContentConnector-Images/Presentation.svg",
     "downloadUrl": "https://templafydownload.blob.core.windows.net/delivery/Integrations/ContentConnector-Images/blank-presentation.pptx",
     "name": "",
     "tags": ""
@@ -590,7 +590,7 @@
     "fileFolderName": "PowerPoint",
     "mimeType": "application/vnd.openxmlformats-officedocument.presentationml.presentation",
     "contentType": "slide",
-    "previewUrl": "https://templafydownload.blob.core.windows.net/delivery/Integrations/ContentConnector-Images/blank-presentation.pptx",
+    "previewUrl": "https://templafydownload.blob.core.windows.net/delivery/Integrations/ContentConnector-Images/Presentation.svg",
     "downloadUrl": "https://templafydownload.blob.core.windows.net/delivery/Integrations/ContentConnector-Images/blank-presentation.pptx",
     "name": "",
     "tags": ""
@@ -601,7 +601,7 @@
     "fileFolderName": "PowerPoint",
     "mimeType": "application/vnd.openxmlformats-officedocument.presentationml.presentation",
     "contentType": "slideElement",
-    "previewUrl": "https://templafydownload.blob.core.windows.net/delivery/Integrations/ContentConnector-Images/Slide%20element%204.pptx",
+    "previewUrl": "https://templafydownload.blob.core.windows.net/delivery/Integrations/ContentConnector-Images/Presentation.svg",
     "downloadUrl": "https://templafydownload.blob.core.windows.net/delivery/Integrations/ContentConnector-Images/Slide%20element%204.pptx",
     "name": "Slide element 4",
     "tags": "circle with circle"
@@ -612,7 +612,7 @@
     "fileFolderName": "PowerPoint",
     "mimeType": "application/vnd.openxmlformats-officedocument.presentationml.presentation",
     "contentType": "slideElement",
-    "previewUrl": "https://templafydownload.blob.core.windows.net/delivery/Integrations/ContentConnector-Images/Slide%20element%205.pptx",
+    "previewUrl": "https://templafydownload.blob.core.windows.net/delivery/Integrations/ContentConnector-Images/Presentation.svg",
     "downloadUrl": "https://templafydownload.blob.core.windows.net/delivery/Integrations/ContentConnector-Images/Slide%20element%205.pptx",
     "name": "Slide element 5",
     "tags": "circle slide"
@@ -623,7 +623,7 @@
     "fileFolderName": "PowerPoint",
     "mimeType": "application/vnd.openxmlformats-officedocument.presentationml.presentation",
     "contentType": "slideElement",
-    "previewUrl": "https://templafydownload.blob.core.windows.net/delivery/Integrations/ContentConnector-Images/Slide%20element%206.pptx",
+    "previewUrl": "https://templafydownload.blob.core.windows.net/delivery/Integrations/ContentConnector-Images/Presentation.svg",
     "downloadUrl": "https://templafydownload.blob.core.windows.net/delivery/Integrations/ContentConnector-Images/Slide%20element%206.pptx",
     "name": "Slide element 6",
     "tags": "circle"

@@ -78,3 +78,10 @@
 
 //     // contentCount (integer): Total number of results
 //     // offset (integer): Current offset
+
+//   const content = await Content.find({
+//     $and: [{ contentType: "image" }],
+//   })
+//     .skip(7)
+//     .limit(3);
+//   res.status(200).json(content);
