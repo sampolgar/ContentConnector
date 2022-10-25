@@ -3,14 +3,14 @@
 [Templafy's Content Connector] (https://support.templafy.com/hc/en-us/articles/4688349602077-How-to-build-a-Custom-Content-Connector-API-) is a server that receives requests from Templafy and responds with data/content to be displayed in the Templafy interface. This template is a sample server to receive requests from Templafy and respond accordingly.
 
 ## How does the template work?
-[As noted here] (https://support.templafy.com/hc/en-us/articles/4688349602077-How-to-build-a-Custom-Content-Connector-API-), Templafy needs the following 3 endpoints supported. This template includes the content format and required requests and responses to fully support its function.
+[As noted here](https://support.templafy.com/hc/en-us/articles/4688349602077-How-to-build-a-Custom-Content-Connector-API-), Templafy needs the following 3 endpoints supported. This template includes the content format and required requests and responses to fully support its function.
 
 ### Routes
 1. POST /oauth/token
 2. GET /content
 3. GET /content/{contentId}/download-url
 
-### Query Parameters for GET /content
+#### Query Parameters for GET /content
 
 | Query Parameter  | Type  | Description |
 | -------------|-----------| ------------- |
