@@ -1,6 +1,28 @@
 # ContentConnector Modern
+## What is the Content Connector?
+[Templafy's Content Connector] (https://support.templafy.com/hc/en-us/articles/4688349602077-How-to-build-a-Custom-Content-Connector-API-) is a server that receives requests from Templafy and responds with data/content to be displayed in the Templafy interface. This template is a sample server to receive requests from Templafy and respond accordingly.
 
-this readme is a work in progress
+## How does the template work?
+[As noted here] (https://support.templafy.com/hc/en-us/articles/4688349602077-How-to-build-a-Custom-Content-Connector-API-), Templafy needs the following 3 endpoints supported. This template includes the content format and required requests and responses to fully support its function.
+
+### Routes
+1. POST /oauth/token
+2. GET /content
+3. GET /content/{contentId}/download-url
+
+### Query Parameters for GET /content
+
+| Query Parameter  | Type  | Description |
+| -------------|-----------| ------------- |
+| `skip`       | Integer   | For paging - From the query, skip the first `x` results. Templafy's first request is `skip=0` |
+| `limit`      | Integer   | Always set to `30` - page size, no flexibility to change  |
+| `contentType`| String    | Templafy requests different content from this server based on what the user requests. Types = `image`, `textElement`, `slide`, `slideElement`, `pdf`, `emailElement`    |
+| `parentId`   | String    | Enables the folder structure in Templafy. When an end-user selects a folder in the interface, Templafy requests all content from the folder using its `parentId`  |
+| `search`     | String    | Enables an end-user to search through your content. We recommend searching names and tags  |
+
+
+https://mongodb.com/
+
 
 # Required query params
 
