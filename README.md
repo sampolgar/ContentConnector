@@ -1,6 +1,4 @@
 # ContentConnector Modern
-## What is the Content Connector?
-[Templafy's Content Connector](https://support.templafy.com/hc/en-us/articles/4688349602077-How-to-build-a-Custom-Content-Connector-API-) is a server that receives requests from Templafy and responds with data/content to be displayed in the Templafy interface. This template is a sample server to receive requests from Templafy and respond accordingly.
 
 ## Table of contents
 * [Intro](#Intro)
@@ -8,6 +6,9 @@
 * [Setup](#setup)
 
 # Intro
+
+## What is the Content Connector?
+[Templafy's Content Connector](https://support.templafy.com/hc/en-us/articles/4688349602077-How-to-build-a-Custom-Content-Connector-API-) is a server that receives requests from Templafy and responds with data/content to be displayed in the Templafy interface. This template is a sample server to receive requests from Templafy and respond accordingly.
 
 ## Example
 In this example, the end-user is in PowerPoint and finds their content within the application. With 1 click they can insert additional slides and insert images directly into content controls with automatic cropping.
