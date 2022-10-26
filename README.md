@@ -26,13 +26,12 @@ https://user-images.githubusercontent.com/39210767/197703163-46b293e1-e7ef-434a-
 
 # API Routes
 
-## Routes
 1. POST /oauth/token
 2. GET /content
 3. GET /content/{contentId}/download-url
 
-### POST /oauth/token
-#### Request
+## POST /oauth/token
+### Request
 ```
 curl -X POST \
   -H "content-type":"application/x-www-form-urlencoded"
@@ -44,20 +43,20 @@ curl -X POST \
   "https://contentconnector/oauth/token"
 ```
 
-#### Response
+### Response
 **Valid response**
 ```json
 HTTP 200 OK
 { "access_token": "fake_access_token" }
 ```
-**Invalid response, Oauth time out**
+**Invalid response, e.g. Oauth time out**
 ```
 HTTP 401 
 Unauthorized 
 ```
 
-### GET /content
-#### Request
+## GET /content
+### Request
 ```
 curl X GET \
 -H "authorization":"Bearer fake_access_token" \
@@ -65,7 +64,7 @@ curl X GET \
 -H "accept-encoding":"gzip" \
 "https://contentconnector/content/?skip=0&limit=30&contentType=image"
 ```
-#### Response
+### Response
 **Valid response**
 ```json
 HTTP 200 OK
@@ -91,22 +90,18 @@ HTTP 200 OK
          "name":"Food1.jpg",
          "tags":"Tag1, tag2"
       },
-        {
-         "id":"1003",
-         "mimeType":"image/jpeg",
+      {
+         "id":"101",
          "parentId": "",
-         "previewUrl":"https://templafydownload.blob.core.windows.net/delivery/Integrations/ContentConnector-Images/Food1.jpg",
-         "downloadUrl":"https://templafydownload.blob.core.windows.net/delivery/Integrations/ContentConnector-Images/Food1.jpg",
-         "name":"Food1.jpg",
+         "mimeType":"application/vnd.templafy.folder",
+         "previewUrl":"",
+         "downloadUrl":"",
+         "name":"Test Folder",
          "tags":"Tag1, tag2"
       },
   ],
 }
 ```
-
-
-
-
 
 #### Query Parameters for GET /content
 
@@ -124,7 +119,7 @@ HTTP 200 OK
 - /content/?skip=0&limit=30&contentType=image&parentId=01
 - /content/?skip=0&limit=30&contentType=image&parentId=01%2f02
 
-### GET /content/{contentId}/download-url
+## GET /content/{contentId}/download-url
 
 https://mongodb.com/
 
@@ -138,14 +133,10 @@ https://mongodb.com/
 
 ```
 curl X GET \
--H "host":"68e0-220-233-33-78.au.ngrok.io" \
 -H "authorization":"Bearer fake_access_token" \
--H "traceparent":"00-654d8b7b002d427cbb3887f355721021-5e2b2d446bea2f2c-01" \
--H "x-forwarded-for":"20.193.37.124" \
--H "x-forwarded-proto":"https"
 -H "x-templafyuser":"spo@templafy.com" \
 -H "accept-encoding":"gzip" \
-"https://68e0-220-233-33-78.au.ngrok.io/content/?skip=0&limit=30&contentType=image"
+"https://contentconnector.io/content/?skip=0&limit=30&contentType=image"
 ```
 
 **Response 1 from Content Connector to Templafy**
