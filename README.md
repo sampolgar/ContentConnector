@@ -1,18 +1,22 @@
 # Content Connector Modern
 
+
 ## Table of contents
 * [Intro](#Intro)
 * [API Routes](#API-Routes)
 * []
 * [Example 1](#Example-1)
 
+
 # Intro
 [Templafy's Content Connector](https://support.templafy.com/hc/en-us/articles/4688349602077-How-to-build-a-Custom-Content-Connector-API-) is a server that receives requests from Templafy and responds with data/content to be displayed in the Templafy interface. This template is a sample server to help you learn how it works and how to configure it with Templafy.
+
 
 ## Example
 In this example, the end-user is in PowerPoint and finds their content within the application. With 1 click they can insert additional slides and insert images directly into content controls with automatic cropping.
 
 https://user-images.githubusercontent.com/39210767/197703163-46b293e1-e7ef-434a-a422-ee4b548630c3.mp4
+
 
 ## Technology
 - mongodb as the data repository
@@ -20,8 +24,11 @@ https://user-images.githubusercontent.com/39210767/197703163-46b293e1-e7ef-434a-
 - content preview url & content download url are both public static links, best practice would change these to pre-signed URL's
 - JavaScript/NodeJS/npm/express.js
 
+
 ## How does the template work?
 [Detailed in our knowledge base](https://support.templafy.com/hc/en-us/articles/4688349602077-How-to-build-a-Custom-Content-Connector-API-), Templafy needs the following 3 endpoints supported. This template includes the content format and required requests and responses to fully support its function.
+
+
 
 # API Routes
 
