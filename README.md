@@ -79,12 +79,12 @@ curl X GET \
 | -------------|-----------| ------------- | ---------------------- |
 | `contentCount `| Integer   | Total number of results from the search query | `"contentCount":33` |
 | `offset `      | Integer   | Current offset. `offset=30` means skip the first 30  | `"offset":30` |
-| `content`| Array    | Array of objects containing  | `content: [{},{}]` |
+| `content`| Array    | Array of objects containing `id`, `mimeType`, `name`, `previewUrl`, `tags`  | `content: [{},{}]` |
 | `id`   | String    | ID of the content | `"id":"1001"` |
 | `mimeType`     | String    | mimeType tells Templafy what content it is | `application/vnd.templafy.folder`, `image/jpeg`, `image/png`, `image/svg+xml`, `application/pdf`, `application/vnd.openxmlformats-officedocument.wordprocessingml.document`, `application/vnd.openxmlformats-officedocument.presentationml.presentation`  |
 | `name`   | String    | Name of the content e.g. image name or folder name | `Images Folder`, `Wine Photo` |
 | `previewUrl`   | String    | Public image link to preview content in Templafy. For PowerPoint, Word, & PDF please choose a content preview or use an icon for Templafy to render to the end-user. Not required for folders  | `"previewUrl":"htpps://contractpdf.jpg"`  |
-| `tags`   | String    | Content tags to support searching | `"tags":"Wine, Restaurants, Burgundy"`  |
+| `tags`   | String    | Content tags to support searching. Not required for folders | `"tags":"Wine, Restaurants, Burgundy"`  |
 
 ### Response
 **Valid response**
