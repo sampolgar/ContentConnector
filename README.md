@@ -1,9 +1,10 @@
-# ContentConnector Modern
+# Content Connector Modern
 
 ## Table of contents
 * [Intro](#Intro)
-* [API Routes](#API Routes)
-* [Setup](#setup)
+* [API Routes](#API-Routes)
+* []
+* [Example 1](#Example-1)
 
 # Intro
 [Templafy's Content Connector](https://support.templafy.com/hc/en-us/articles/4688349602077-How-to-build-a-Custom-Content-Connector-API-) is a server that receives requests from Templafy and responds with data/content to be displayed in the Templafy interface. This template is a sample server to help you learn how it works and how to configure it with Templafy.
@@ -145,3 +146,15 @@ curl X GET \
 HTTP 200 OK
 { "downloadUrl": "https://imagelink.com/pre-signed-url-for-this-image.png" }
 ```
+# Getting Started
+## Setup Mongodb Atlas
+### Environment Variables
+```
+NODE_ENV = development
+PORT = 5000
+MONGO_URI = mongodb+srv://MONGODB:MONGODBPASSWORD]@cluster0.gahkhen.mongodb.net/?retryWrites=true&w=majority
+```
+### Add Content
+### Test Content
+
+## Setup Templafy
