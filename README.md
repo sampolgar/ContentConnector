@@ -2,19 +2,42 @@
 ## What is the Content Connector?
 [Templafy's Content Connector](https://support.templafy.com/hc/en-us/articles/4688349602077-How-to-build-a-Custom-Content-Connector-API-) is a server that receives requests from Templafy and responds with data/content to be displayed in the Templafy interface. This template is a sample server to receive requests from Templafy and respond accordingly.
 
+## Table of contents
+* [Intro](#Intro)
+* [API Routes](#API Routes)
+* [Setup](#setup)
+
+# Intro
+
 ## Example
 In this example, the end-user is in PowerPoint and finds their content within the application. With 1 click they can insert additional slides and insert images directly into content controls with automatic cropping.
 
 https://user-images.githubusercontent.com/39210767/197703163-46b293e1-e7ef-434a-a422-ee4b548630c3.mp4
 
+## Technology
+- mongodb as the data repository
+- content stored in a public blob
+- content preview url & content download url are both public static links, best practice would change these to pre-signed URL's
+- JavaScript/NodeJS/npm/express.js
 
 ## How does the template work?
-[As noted here](https://support.templafy.com/hc/en-us/articles/4688349602077-How-to-build-a-Custom-Content-Connector-API-), Templafy needs the following 3 endpoints supported. This template includes the content format and required requests and responses to fully support its function.
+[As noted](https://support.templafy.com/hc/en-us/articles/4688349602077-How-to-build-a-Custom-Content-Connector-API-), Templafy needs the following 3 endpoints supported. This template includes the content format and required requests and responses to fully support its function.
 
-### Routes
+# API Routes
+
+## Routes
 1. POST /oauth/token
 2. GET /content
 3. GET /content/{contentId}/download-url
+
+### POST /oauth/token
+
+
+
+### GET /content
+
+### GET /content/{contentId}/download-url
+
 
 #### Query Parameters for GET /content
 
