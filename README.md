@@ -32,6 +32,28 @@ https://user-images.githubusercontent.com/39210767/197703163-46b293e1-e7ef-434a-
 3. GET /content/{contentId}/download-url
 
 ### POST /oauth/token
+#### Request
+```
+curl -X POST \
+  -H "content-type":"application/x-www-form-urlencoded"
+  -H "x-templafyuser":"spo@templafy.com" \
+  -H "accept-encoding":"gzip" \
+  -d "grant_type=client_credentials" \
+  -d "client_secret=clientSecretFromTemplafy" \
+  -d "client_id=clientIdFromTemplafy" \
+  "https://contentconnector/oauth/token"
+```
+
+#### Response
+**Valid response**
+```json
+HTTP 200 OK
+{ "access_token": "fake_access_token" }
+```
+**Invalid response, Oauth time out**
+```
+HTTP 401 Unauthorized 
+```
 
 
 
@@ -50,13 +72,11 @@ https://user-images.githubusercontent.com/39210767/197703163-46b293e1-e7ef-434a-
 | `parentId`   | String    | Enables the folder structure in Templafy. When an end-user selects a folder in the interface, Templafy requests all content from the folder using its `parentId`  |
 | `search`     | String    | Enables an end-user to search through your content. We recommend searching names and tags  |
 
+#### Examples
 
-
-# Required query params
-
-/content/?skip=0&limit=30&contentType=image
-/content/?skip=0&limit=30&contentType=image&parentId=01
-/content/?skip=0&limit=30&contentType=image&parentId=01%2f02
+- /content/?skip=0&limit=30&contentType=image
+- /content/?skip=0&limit=30&contentType=image&parentId=01
+- /content/?skip=0&limit=30&contentType=image&parentId=01%2f02
 
 
 https://mongodb.com/
