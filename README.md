@@ -3,16 +3,15 @@
 
 ## Table of contents
 * [Intro](#Intro)
+* [Instructions](#Instructions)
 * [API Routes](#API-Routes)
-* []
-* [Example 1](#Example-1)
+* [Use Cases](#Use-Cases)
 
 
 # Intro
 [Templafy's Content Connector](https://support.templafy.com/hc/en-us/articles/4688349602077-How-to-build-a-Custom-Content-Connector-API-) is a server that receives requests from Templafy and responds with data/content to be displayed in the Templafy interface. This template is a sample server to help you learn how it works and how to configure it with Templafy.
 
-
-## Example
+## Why customers need a Content Connector
 In this example, the end-user is in PowerPoint and finds their content within the application. With 1 click they can insert additional slides and insert images directly into content controls with automatic cropping.
 
 https://user-images.githubusercontent.com/39210767/197703163-46b293e1-e7ef-434a-a422-ee4b548630c3.mp4
@@ -23,6 +22,41 @@ https://user-images.githubusercontent.com/39210767/197703163-46b293e1-e7ef-434a-
 - content stored in a public Azure blob
 - content preview url & content download url are both public static links, best practice would change these to pre-signed URL's
 - JavaScript/NodeJS/npm/express.js
+
+# Instructions
+## Create MongoDB
+MongoDB is a cloud hosted nosql database, great for working with NodeJS. 
+1. create an account on mongodb on [mongodb atlas](https://mongodb.com/) - select the free tier shared
+2. create a username and password, you'll need to use this below
+3. set the Network Access to your IP address or All IP addresses - use 0.0.0.0/0
+4. You should now see your Cluster0
+5. Click Connect and MongoDB Drivers and copy the connection string `mongodb+srv://contentconnector:<password>@cluster0.6j5j1zz.mongodb.net/?retryWrites=true&w=majority`
+
+## Server
+Setup the server
+1. create a directory for the project on your computer
+2. run git clone `https://github.com/sampolgar/ContentConnector.git`
+3. open the folder in your text editor e.g. vscode
+4. rename the `.env-sample` file to `.env` and replace the sample MONGO_URI with the URI from step 5 above. Note: change the `<password>` to your mongodb password 
+5. run `npm install`
+6. run `npm run server`
+7. Your server should be running on `http://localhost:5000`
+
+## Testing with Postman & Adding Content to DB
+Todo
+- [ ] make routes for `http://localhost:5000/mongodb/postContent
+- [ ] make routes for `http://localhost:5000/mongodb/makeIndex
+- [ ] make route for getting all content
+1. Open Postman and create a new POST request to `http://localhost:5000/content`. Set the body to Raw and change the format to JSON
+2. Copy and paste the content array ContentConnector/content/content.json in the body and send it
+3. The log in Postman should say `"success": "new documents added!"` with the data. 
+4. You can test this by going back to the MongoDB website and clicking "Browse Collections" - you should see your contents in the database
+
+## Create MongoDB Index
+The index will enable our Content Connector to search for names and tags. e.g. when the user searches "food", MongoDB finds all content with names/tags with food or Food or fooderati
+
+## Testing with Postman
+## Limitations
 
 
 ## How does the template work?
@@ -137,6 +171,7 @@ HTTP 200 OK
 - /content/?skip=0&limit=30&contentType=slides
 - /content/?skip=0&limit=30&contentType=image&parentId=01
 - /content/?skip=0&limit=30&contentType=image&parentId=01%2f02
+- /content/?skip=0&limit=30&contentType=pdf&parentId=01%2f02&search=possum
 
 ## GET /content/{contentId}/download-url
 
@@ -165,3 +200,7 @@ MONGO_URI = mongodb+srv://MONGODB:MONGODBPASSWORD]@cluster0.gahkhen.mongodb.net/
 ### Test Content
 
 ## Setup Templafy
+
+# Use-cases
+
+# Limitations
