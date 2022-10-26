@@ -47,7 +47,7 @@ curl -X POST \
 HTTP 200 OK
 { "access_token": "fake_access_token" }
 ```
-**Invalid response, e.g. Oauth time out**
+**Valid response. If the token times out, send a 401 and Templafy will request a new OAuth**
 ```json
 HTTP 401 Unauthorized 
 ```
@@ -87,7 +87,6 @@ curl X GET \
 | `tags`   | String    | Content tags to support searching. Not required for folders | `"tags":"Wine, Restaurants, Burgundy"`  |
 
 ### Response
-**Valid response**
 ```json
 HTTP 200 OK
 {
