@@ -52,14 +52,60 @@ HTTP 200 OK
 ```
 **Invalid response, Oauth time out**
 ```
-HTTP 401 Unauthorized 
+HTTP 401 
+Unauthorized 
+```
+
+### GET /content
+#### Request
+```
+curl X GET \
+-H "authorization":"Bearer fake_access_token" \
+-H "x-templafyuser":"spo@templafy.com" \
+-H "accept-encoding":"gzip" \
+"https://contentconnector/content/?skip=0&limit=30&contentType=image"
+```
+#### Response
+**Valid response**
+```json
+HTTP 200 OK
+{
+   "contentCount": 3,
+   "offset": 0,
+   "content":[
+      {
+         "id":"1001",
+         "parentId": "101",
+         "mimeType":"image/jpeg",
+         "previewUrl":"https://templafydownload.blob.core.windows.net/delivery/Integrations/ContentConnector-Images/Food1.jpg",
+         "downloadUrl":"https://templafydownload.blob.core.windows.net/delivery/Integrations/ContentConnector-Images/Food1.jpg",
+         "name":"Food1.jpg",
+         "tags":"Tag1, tag2"
+      },
+      {
+         "id":"1002",
+         "mimeType":"image/jpeg",
+         "parentId": "101",
+         "previewUrl":"https://templafydownload.blob.core.windows.net/delivery/Integrations/ContentConnector-Images/Food1.jpg",
+         "downloadUrl":"https://templafydownload.blob.core.windows.net/delivery/Integrations/ContentConnector-Images/Food1.jpg",
+         "name":"Food1.jpg",
+         "tags":"Tag1, tag2"
+      },
+        {
+         "id":"1003",
+         "mimeType":"image/jpeg",
+         "parentId": "",
+         "previewUrl":"https://templafydownload.blob.core.windows.net/delivery/Integrations/ContentConnector-Images/Food1.jpg",
+         "downloadUrl":"https://templafydownload.blob.core.windows.net/delivery/Integrations/ContentConnector-Images/Food1.jpg",
+         "name":"Food1.jpg",
+         "tags":"Tag1, tag2"
+      },
+  ],
+}
 ```
 
 
 
-### GET /content
-
-### GET /content/{contentId}/download-url
 
 
 #### Query Parameters for GET /content
@@ -78,6 +124,7 @@ HTTP 401 Unauthorized
 - /content/?skip=0&limit=30&contentType=image&parentId=01
 - /content/?skip=0&limit=30&contentType=image&parentId=01%2f02
 
+### GET /content/{contentId}/download-url
 
 https://mongodb.com/
 
