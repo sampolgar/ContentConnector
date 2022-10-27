@@ -40,16 +40,20 @@ const makeDBQueryFromQueryParams = (query) => {
   if (search) {
     dbQuery.$text = { $search: `*${search}*` };
   }
-  //if the parentId is available, add the parentId to the query which will find the subfolders / images in the parentId
-  if (parentId) {
-    dbQuery.$or = [];
-    dbQuery.$or.push({ parentId: parentId });
-    dbQuery.$and.push({ parentId: parentId.slice(-3) });
-  }
-  //content type should always be available
+
   if (contentType) {
     dbQuery.$and.push({ contentType: contentType });
   }
+  //if the parentId is available, add the parentId to the query which will find the subfolders / images in the parentId
+  if (!parentId || parentId === "null") {
+    dbQuery.$and.push({ parentId: parentId.slice(-3) });
+    dbQuery.$or = [{ contentType: "folder", parentId: parentId.slice(-3) }];
+  } else {
+    dbQuery.$and.push({ parentId: parentId.slice(-3) });
+    dbQuery.$or = [{ contentType: "folder", parentId: parentId.slice(-3) }];
+  }
+  //content type should always be available
+
   return dbQuery;
 };
 
