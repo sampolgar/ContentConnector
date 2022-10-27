@@ -1,13 +1,8 @@
 const express = require("express");
 const router = express.Router();
-const {
-  getContent,
-  getDownload,
-  setContent,
-  deleteContent,
-} = require("../controllers/contentController");
+const { getContent, getDownload } = require("../controllers/contentController");
 
-router.route("/").get(getContent).post(setContent).delete(deleteContent);
+router.route("/").get(getContent);
 router.route("/:id/download-url").get(getDownload);
 
 module.exports = router;

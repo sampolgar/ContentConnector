@@ -95,60 +95,7 @@ const getDownload = asyncHandler(async (req, res) => {
   }
 });
 
-///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-//
-//
-//                     Helper functions for building, not needed for Production
-//
-//
-///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
-//@desc Set Content - send an array of objects into the database - the format must match the Content model in the model folder
-//@route POST /content
-const setContent = asyncHandler(async (req, res) => {
-  if (req.header.contentType != "application/json") {
-    res.status(400);
-    throw new Error("Content type must be application/json");
-  } else if (isEmptyObject(req.body)) {
-    res.status(400);
-    throw new Error("body must not be empty");
-  }
-
-  Content.insertMany(req.body)
-    .then((result) => {
-      console.log("result: " + result);
-      res.status(200).json({ success: "new documents added!", data: result });
-    })
-    .catch((err) => {
-      console.log("err: " + err);
-      res.status(400).json({ error: err });
-    });
-});
-
-//check input is not null
-const isEmptyObject = (obj) => {
-  console.log("hello");
-  console.log(Object.keys(obj).length === 0);
-  return Object.keys(obj).length === 0;
-};
-
-// //@desc Delete Content from the database - used in Testing
-// //@route POST /content
-const deleteContent = asyncHandler(async (req, res) => {
-  Content.deleteMany({})
-    .then((result) => {
-      console.log("result: " + result);
-      res.status(200).json({ success: "documents deleted!", data: result });
-    })
-    .catch((err) => {
-      console.log("err: " + err);
-      res.status(400).json({ error: err });
-    });
-});
-
 module.exports = {
   getContent,
   getDownload,
-  setContent,
-  deleteContent,
 };

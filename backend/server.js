@@ -13,6 +13,7 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use("/oauth/token", require("./routes/oauthRoutes"));
 app.use("/content", require("./routes/contentRoutes"));
+app.use("/setup", require("./routes/setupRoutes"));
 
 app.use(errorHandler); //this will override default error handler
 
