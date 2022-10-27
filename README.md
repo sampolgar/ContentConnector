@@ -26,7 +26,7 @@ https://user-images.githubusercontent.com/39210767/197703163-46b293e1-e7ef-434a-
 # Instructions
 ## Create MongoDB
 MongoDB is a cloud hosted nosql database, great for working with NodeJS. 
-1. create an account on mongodb on [mongodb atlas](https://mongodb.com/) - select the free tier shared
+1. create an account on [mongodb atlas](https://mongodb.com/) - select the free tier shared
 2. create a username and password, you'll need to use this below
 3. set the Network Access to your IP address or All IP addresses - use 0.0.0.0/0
 4. You should now see your Cluster0
@@ -54,6 +54,12 @@ Todo
 
 ## Create MongoDB Index
 The index will enable our Content Connector to search for names and tags. e.g. when the user searches "food", MongoDB finds all content with names/tags with food or Food or fooderati
+1. in mongodb atlas, click on your database, then browse collection
+2. click on `search` > `create index`
+3. `json editor` > keep defaults & ensure `"dynamic": true` and index name is `default` 
+4. create
+
+
 
 ## Testing with Postman
 ## Limitations
