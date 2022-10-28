@@ -1,19 +1,17 @@
 const Content = require("../model/contentModel");
-
 const asyncHandler = require("express-async-handler");
 
 // @desc Create Content
 // @route POST /setup/createcontent
 const createContent = asyncHandler(async (req, res) => {
-
   if (!req.is("application/json")) {
     res.status(400);
     throw new Error("Content-Type must be application/json");
-
   } else if (isEmptyObject(req.body)) {
     res.status(400);
-    throw new Error("body must not be empty. Copy the content from content/content.json");
-
+    throw new Error(
+      "body must not be empty. Copy the content from content/content.json"
+    );
   } else {
     Content.insertMany(req.body)
       .then((result) => {
@@ -64,8 +62,52 @@ const deleteAllContent = asyncHandler(async (req, res) => {
     });
 });
 
+const testQuery = asyncHandler(async (req, res) => {
+  const dbQuery = [
+    {
+      $search: {
+        index: "default",
+        compound: {
+          must: [
+            {
+              text: {
+                query: "Burgundy",
+                path: ["name", "tags"],
+              },
+            },
+          ],
+          filter: [
+            {
+              text: {
+                query: "103",
+                path: "parentId",
+              },
+            },
+            {
+              text: {
+                query: "image",
+                path: "contentType",
+              },
+            },
+          ],
+        },
+        count: {
+          type: "total",
+        },
+      },
+    },
+  ];
+
+  const content = await Content.aggregate(dbQuery);
+
+  console.log(JSON.stringify(content));
+  
+  res.status(200).json({ success: "documents found!", data: content });
+});
+
 module.exports = {
   createContent,
   getAllContent,
   deleteAllContent,
+  testQuery,
 };

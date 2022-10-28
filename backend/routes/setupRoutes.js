@@ -4,6 +4,7 @@ const {
   createContent,
   getAllContent,
   deleteAllContent,
+  testQuery,
 } = require("../controllers/setupController");
 
 //setup routes
@@ -12,5 +13,7 @@ router
   .post(createContent)
   .get(getAllContent)
   .delete(deleteAllContent)
+
+router.route("/testquery").get(testQuery)
 
 module.exports = router;
