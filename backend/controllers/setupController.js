@@ -1,7 +1,11 @@
 const asyncHandler = require("express-async-handler");
 const defaultContent = require("../../content/content.json");
-const db = require("../config/db").getDB();
+const db = require("../utils/db").getDB();
 const collection = db.collection(process.env.MONGO_COLLECTION);
+
+// @desc Create Content
+// @route POST /setup
+// @MongoDB insertMany() - https://www.mongodb.com/docs/manual/reference/method/db.collection.insertMany/
 
 const createContent = asyncHandler(async (req, res) => {
   //check if the body is empty. If so, insert default content
@@ -22,8 +26,6 @@ const createContent = asyncHandler(async (req, res) => {
   }
 });
 
-//query the DB and return results + httpCode
-//using MongoDB insertMany() method
 const createContentHandler = async (query) => {
   try {
     const dbResult = await collection.insertMany(query);
@@ -34,8 +36,10 @@ const createContentHandler = async (query) => {
   }
 };
 
-//query the DB and return results + httpCode
-//using MongoDB find() method
+// @desc query the DB and return results + httpCode
+// @route GET /setup
+// @MongoDB query find()  - https://www.mongodb.com/docs/manual/reference/method/db.collection.find/
+
 const getAllContent = asyncHandler(async (req, res) => {
   const { result, httpCode } = await getAllContentHandler();
   respondToClient(res, httpCode, result);
@@ -51,7 +55,10 @@ const getAllContentHandler = async () => {
   }
 };
 
-//query the DB and delete the content
+// @desc delete all records in the DB
+// @route DELETE /setup
+// @MongoDB deleteMany()  - https://www.mongodb.com/docs/manual/reference/method/db.collection.deleteMany/
+
 const deleteAllContent = asyncHandler(async (req, res) => {
   const { result, httpCode } = await deleteAllContentHandler();
   respondToClient(res, httpCode, result);
@@ -67,8 +74,13 @@ const deleteAllContentHandler = async () => {
   }
 };
 
+// @for testing queries
 const testQuery = asyncHandler(async (req, res) => {
-  res.status(200).json("hello");
+  //test query
+  const cursor = collection.aggregate(req.body);
+  await cursor.forEach((docs) => {
+    console.log(docs);
+  });
 });
 
 const respondToClient = (res, httpCode, message) => {

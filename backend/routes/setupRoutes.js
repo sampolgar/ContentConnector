@@ -12,8 +12,8 @@ router
   .route("/")
   .post(createContent)
   .get(getAllContent)
-  .delete(deleteAllContent)
+  .delete(deleteAllContent);
 
-router.route("/testquery").get(testQuery)
+router.route("/testquery").post(testQuery);
 
 module.exports = router;

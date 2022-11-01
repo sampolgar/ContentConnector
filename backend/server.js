@@ -2,7 +2,7 @@ const express = require("express");
 const dotenv = require("dotenv").config();
 const colors = require("colors");
 const port = process.env.PORT;
-const { connectDB } = require("./config/db");
+const { connectDB } = require("./utils/db");
 const { errorHandler } = require("./middleware/errorMiddleware");
 
 // connect to the DB before starting the server
@@ -16,6 +16,6 @@ connectDB().then(() => {
 
   //setup routes
   // app.use("/oauth/token", require("./routes/oauthRoutes"));
-  // app.use("/content", require("./routes/contentRoutes"));
+  app.use("/content", require("./routes/contentRoutes"));
   app.use("/setup", require("./routes/setupRoutes"));
 });
