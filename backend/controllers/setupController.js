@@ -3,16 +3,18 @@ const defaultContent = require("../../content/content.json");
 const db = require("../config/db").getDB();
 const collection = db.collection(process.env.MONGO_COLLECTION);
 
-
 const createContent = asyncHandler(async (req, res) => {
-  if (!req.is("application/json")) {
-    respondToClient(res, 400, "Content-Type must be application/json");
-    // res.status(400);
-    // throw new Error("Content-Type must be application/json");
-  } else if (Object.keys(req.body).length === 0) {
-    //if req.body is empty, use default content
+  //check if the body is empty. If so, insert default content
+  if (Object.keys(req.body).length === 0) {
     const { result, httpCode } = await createContentHandler(defaultContent);
-    respondToClient(res, httpCode, result);
+    respondToClient(
+      res,
+      httpCode,
+      "inserted default content because none was given " + result
+    );
+    //else you must insert application/json content
+  } else if (!req.is("application/json")) {
+    respondToClient(res, 400, "Content-Type must be application/json");
   } else {
     //allow user to pass in content
     const { result, httpCode } = await createContentHandler(req.body);
@@ -49,6 +51,7 @@ const getAllContentHandler = async () => {
   }
 };
 
+//query the DB and delete the content
 const deleteAllContent = asyncHandler(async (req, res) => {
   const { result, httpCode } = await deleteAllContentHandler();
   respondToClient(res, httpCode, result);
