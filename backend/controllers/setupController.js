@@ -1,109 +1,45 @@
-const Content = require("../model/contentModel");
 const asyncHandler = require("express-async-handler");
+const { db } = require("../config/db");
 
-// @desc Create Content
-// @route POST /setup/createcontent
 const createContent = asyncHandler(async (req, res) => {
   if (!req.is("application/json")) {
-    res.status(400);
-    throw new Error("Content-Type must be application/json");
-  } else if (isEmptyObject(req.body)) {
-    res.status(400);
-    throw new Error(
-      "body must not be empty. Copy the content from content/content.json"
-    );
+    respondToClient(res, 400, "Content-Type must be application/json");
+    // res.status(400);
+    // throw new Error("Content-Type must be application/json");
+  } else if (!req.body || req.body == "") {
+    //use content.json
+    // throw new Error("body must not be empty. Copy the content from content/content.json");
+    const content = require("../content/content.json");
+    const { result, httpCode } = await queryDb(content);
+    respondToClient(res, httpCode, result);
   } else {
-    Content.insertMany(req.body)
-      .then((result) => {
-        console.log("result: " + result);
-        res.status(200).json({ success: "new documents added!", data: result });
-      })
-      .catch((err) => {
-        console.log("err: " + err);
-        res.status(400).json({ error: err });
-      });
+    const { result, httpCode } = await queryDb(req.body);
+    respondToClient(res, httpCode, result);
   }
 });
 
-// @desc Helper function to check input is not null
-const isEmptyObject = (obj) => {
-  console.log("hello");
-  console.log(Object.keys(obj).length === 0);
-  return Object.keys(obj).length === 0;
-};
+const getAllContent = asyncHandler(async (req, res) => {});
 
-//@desc Get all content to test the content is in the DB
-// @route GET /setup/getallcontent
-
-const getAllContent = asyncHandler(async (req, res) => {
-  Content.find({})
-    .then((result) => {
-      console.log("result: " + result);
-      res.status(200).json({ success: "documents found!", data: result });
-    })
-    .catch((err) => {
-      console.log("err: " + err);
-      res.status(400).json({ error: err });
-    });
-});
-
-//@desc Delete all content to help with testing if needed
-// @route DELETE /setup/deleteallcontent
-
-const deleteAllContent = asyncHandler(async (req, res) => {
-  Content.deleteMany({})
-    .then((result) => {
-      console.log("result: " + result);
-      res.status(200).json({ success: "documents deleted!", data: result });
-    })
-    .catch((err) => {
-      console.log("err: " + err);
-      res.status(400).json({ error: err });
-    });
-});
+const deleteAllContent = asyncHandler(async (req, res) => {});
 
 const testQuery = asyncHandler(async (req, res) => {
-  const dbQuery = [
-    {
-      $search: {
-        index: "default",
-        compound: {
-          must: [
-            {
-              text: {
-                query: "Burgundy",
-                path: ["name", "tags"],
-              },
-            },
-          ],
-          filter: [
-            {
-              text: {
-                query: "103",
-                path: "parentId",
-              },
-            },
-            {
-              text: {
-                query: "image",
-                path: "contentType",
-              },
-            },
-          ],
-        },
-        count: {
-          type: "total",
-        },
-      },
-    },
-  ];
-
-  const content = await Content.aggregate(dbQuery);
-
-  console.log(JSON.stringify(content));
-  
-  res.status(200).json({ success: "documents found!", data: content });
+  console.log("hello");
 });
+
+//query the DB and return results + httpCode
+const queryDb = async (query) => {
+  try {
+    const dbResult = await db.insertMany(query);
+    return { result: dbResult, httpCode: 200 };
+  } catch (e) {
+    console.error(e);
+    return { result: e, httpCode: 400 };
+  }
+};
+
+const respondToClient = (res, httpCode, message) => {
+  res.status(httpCode).json({ message: message });
+};
 
 module.exports = {
   createContent,
