@@ -4,23 +4,13 @@ let client;
 let db;
 
 const connectDB = async () => {
-  client = new MongoClient(process.env.MONGO_URI, options);
+  client = new MongoClient(process.env.MONGO_URI);
   await client.connect();
   db = client.db(process.env.MONGO_DB);
-  module.exports = { connectDB, client };
 };
 
-// const collection = db.collection("test");
+const getDB = () => {
+  return db;
+};
 
-//   let options = {};
-//   client = new MongoClient(process.env.MONGO_URI, options);
-
-//   try {
-//     await client.connect();
-//     db = client.db("test");
-
-//     console.log("MongoDB Connected".cyan.underline.bold);
-//   } catch (e) {
-//     console.error(e);
-//   }
-// };
+module.exports = { connectDB, getDB };
