@@ -61,6 +61,10 @@ const agg = [
   },
 ];
 
+//2.    ?skip=0&limit=30&contentType=image&parentId=100
+// find images in parentid 103
+// or
+// find folders in parentid 103
 const agg2 = [
   {
     $match: {
@@ -113,6 +117,11 @@ const agg2 = [
   },
 ];
 
+
+//4.    ?skip=0&limit=30&contentType=image&parentId=&search=wine
+// find any documents with contentType = images and wine in the name or tags
+//search for cat
+//filter by images
 const agg3 = [
   {
     $search: {

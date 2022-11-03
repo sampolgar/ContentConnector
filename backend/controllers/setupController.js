@@ -2,6 +2,8 @@ const asyncHandler = require("express-async-handler");
 const defaultContent = require("../../content/content.json");
 const db = require("../utils/db").getDB();
 const collection = db.collection(process.env.MONGO_COLLECTION);
+// import { defaultQueryNoFolder } from "../utils/defaultQueryNoFolder";
+const defaultQueryNoFolder = require("../utils/defaultQueryNoFolder");
 
 // @desc Create Content
 // @route POST /setup
@@ -77,9 +79,8 @@ const deleteAllContentHandler = async () => {
 // @for testing queries
 const testQuery = asyncHandler(async (req, res) => {
   //test query
-  const agg = req.body;
-
-  const dbResult = await collection.aggregate(agg).toArray();
+  const dbQuery = await defaultQueryNoFolder(req.params);
+  const dbResult = await collection.aggregate(dbQuery).toArray();
   res.status(200).json({ message: dbResult });
 
   // const cursor = collection.aggregate(req.body);

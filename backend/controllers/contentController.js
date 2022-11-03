@@ -25,6 +25,7 @@ const collection = db.collection(process.env.MONGO_COLLECTION);
 
 const getContent = asyncHandler(async (req, res) => {
   console.log("hellow");
+  
   // parse query params in the query param handler
   // response denotes which handler to use
   //   res.status(200).json({ message: "get content" });
