@@ -15,7 +15,7 @@ connectDB().then(() => {
   app.listen(port, () => console.log(`Server running on port ${port}`));
 
   //setup routes
-  // app.use("/oauth/token", require("./routes/oauthRoutes"));
+  app.use("/oauth/token", require("./routes/oauthRoutes"));
   app.use("/content", require("./routes/contentRoutes"));
   app.use("/setup", require("./routes/setupRoutes"));
 });

@@ -1,8 +1,9 @@
-const defaultQueryNoFolder = async ({
-  contentType = "",
-  skip = "",
-  limit = "",
-}) => {
+//?skip=0&limit=30&contentType=image&parentId=
+
+const dbQueryNoSearchNoParentId = ({ skip, limit, contentType }) => {
+  skip = parseInt(skip);
+  limit = parseInt(limit);
+
   return [
     {
       $match: {
@@ -58,6 +59,5 @@ const defaultQueryNoFolder = async ({
     },
   ];
 };
-// export { defaultQueryNoFolder };
-// export * from "./dbQueries";
-module.exports = { defaultQueryNoFolder };
+
+module.exports = dbQueryNoSearchNoParentId;

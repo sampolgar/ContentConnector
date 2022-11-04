@@ -2,7 +2,7 @@
   {
     "id": "100",
     "parentId": "",
-    "fileFolderName": "Images",
+    "fileType": "images",
     "mimeType": "application/vnd.templafy.folder",
     "contentType": "folder",
     "priority": 1,
@@ -14,7 +14,7 @@
   {
     "id": "101",
     "parentId": "100",
-    "fileFolderName": "Food",
+    "fileType": "Food",
     "mimeType": "application/vnd.templafy.folder",
     "contentType": "folder",
     "priority": 1,
@@ -26,7 +26,7 @@
   {
     "id": "102",
     "parentId": "100",
-    "fileFolderName": "Holidays",
+    "fileType": "Holidays",
     "mimeType": "application/vnd.templafy.folder",
     "contentType": "folder",
     "priority": 1,
@@ -38,7 +38,7 @@
   {
     "id": "103",
     "parentId": "100",
-    "fileFolderName": "Wine",
+    "fileType": "Wine",
     "mimeType": "application/vnd.templafy.folder",
     "contentType": "folder",
     "priority": 1,
@@ -50,7 +50,7 @@
   {
     "id": "104",
     "parentId": "103",
-    "fileFolderName": "Fine Wine",
+    "fileType": "Fine Wine",
     "mimeType": "application/vnd.templafy.folder",
     "contentType": "folder",
     "priority": 1,
@@ -62,7 +62,7 @@
   {
     "id": "1001",
     "parentId": "101",
-    "fileFolderName": "Food",
+    "fileType": "Food",
     "height": "100",
     "width": "100",
     "mimeType": "image/jpeg",
@@ -76,7 +76,7 @@
   {
     "id": "1002",
     "parentId": "101",
-    "fileFolderName": "Food",
+    "fileType": "Food",
     "height": "100",
     "width": "100",
     "mimeType": "image/jpeg",
@@ -90,7 +90,7 @@
   {
     "id": "1003",
     "parentId": "101",
-    "fileFolderName": "Food",
+    "fileType": "Food",
     "height": "100",
     "width": "100",
     "mimeType": "image/jpeg",
@@ -104,7 +104,7 @@
   {
     "id": "1004",
     "parentId": "101",
-    "fileFolderName": "Food",
+    "fileType": "Food",
     "height": "100",
     "width": "100",
     "mimeType": "image/jpeg",
@@ -118,7 +118,7 @@
   {
     "id": "1005",
     "parentId": "101",
-    "fileFolderName": "Food",
+    "fileType": "Food",
     "height": "100",
     "width": "100",
     "mimeType": "image/jpeg",
@@ -132,7 +132,7 @@
   {
     "id": "1006",
     "parentId": "102",
-    "fileFolderName": "Holidays",
+    "fileType": "Holidays",
     "height": "100",
     "width": "100",
     "mimeType": "image/png",
@@ -146,7 +146,7 @@
   {
     "id": "1007",
     "parentId": "102",
-    "fileFolderName": "Holidays",
+    "fileType": "Holidays",
     "height": "100",
     "width": "100",
     "mimeType": "image/png",
@@ -160,7 +160,7 @@
   {
     "id": "1008",
     "parentId": "102",
-    "fileFolderName": "Holidays",
+    "fileType": "Holidays",
     "height": "100",
     "width": "100",
     "mimeType": "image/png",
@@ -174,7 +174,7 @@
   {
     "id": "1009",
     "parentId": "102",
-    "fileFolderName": "Holidays",
+    "fileType": "Holidays",
     "height": "100",
     "width": "100",
     "mimeType": "image/png",
@@ -188,7 +188,7 @@
   {
     "id": "1010",
     "parentId": "102",
-    "fileFolderName": "Holidays",
+    "fileType": "Holidays",
     "height": "100",
     "width": "100",
     "mimeType": "image/png",
@@ -202,7 +202,7 @@
   {
     "id": "1011",
     "parentId": "103",
-    "fileFolderName": "Wine",
+    "fileType": "Wine",
     "height": "100",
     "width": "100",
     "mimeType": "image/png",
@@ -216,7 +216,7 @@
   {
     "id": "1012",
     "parentId": "103",
-    "fileFolderName": "Wine",
+    "fileType": "Wine",
     "height": "100",
     "width": "100",
     "mimeType": "image/png",
@@ -230,7 +230,7 @@
   {
     "id": "1013",
     "parentId": "103",
-    "fileFolderName": "Wine",
+    "fileType": "Wine",
     "height": "100",
     "width": "100",
     "mimeType": "image/jpeg",
@@ -244,7 +244,7 @@
   {
     "id": "1014",
     "parentId": "103",
-    "fileFolderName": "Wine",
+    "fileType": "Wine",
     "height": "100",
     "width": "100",
     "mimeType": "image/jpeg",
@@ -258,7 +258,7 @@
   {
     "id": "1015",
     "parentId": "104",
-    "fileFolderName": "Wine",
+    "fileType": "Wine",
     "height": "100",
     "width": "100",
     "mimeType": "image/jpeg",
@@ -272,7 +272,7 @@
   {
     "id": "1016",
     "parentId": "101",
-    "fileFolderName": "Food",
+    "fileType": "Food",
     "height": "100",
     "width": "100",
     "mimeType": "image/jpeg",
@@ -286,7 +286,7 @@
   {
     "id": "1017",
     "parentId": "101",
-    "fileFolderName": "Food",
+    "fileType": "Food",
     "height": "100",
     "width": "100",
     "mimeType": "image/jpeg",
@@ -300,7 +300,7 @@
   {
     "id": "1018",
     "parentId": "101",
-    "fileFolderName": "Food",
+    "fileType": "Food",
     "height": "100",
     "width": "100",
     "mimeType": "image/jpeg",
@@ -314,7 +314,7 @@
   {
     "id": "1019",
     "parentId": "101",
-    "fileFolderName": "Food",
+    "fileType": "Food",
     "height": "100",
     "width": "100",
     "mimeType": "image/jpeg",
@@ -328,7 +328,7 @@
   {
     "id": "1020",
     "parentId": "101",
-    "fileFolderName": "Food",
+    "fileType": "Food",
     "height": "100",
     "width": "100",
     "mimeType": "image/jpeg",
@@ -342,7 +342,7 @@
   {
     "id": "1021",
     "parentId": "102",
-    "fileFolderName": "Holidays",
+    "fileType": "Holidays",
     "height": "100",
     "width": "100",
     "mimeType": "image/png",
@@ -356,7 +356,7 @@
   {
     "id": "1022",
     "parentId": "102",
-    "fileFolderName": "Holidays",
+    "fileType": "Holidays",
     "height": "100",
     "width": "100",
     "mimeType": "image/png",
@@ -370,7 +370,7 @@
   {
     "id": "1023",
     "parentId": "102",
-    "fileFolderName": "Holidays",
+    "fileType": "Holidays",
     "height": "100",
     "width": "100",
     "mimeType": "image/png",
@@ -384,7 +384,7 @@
   {
     "id": "1024",
     "parentId": "102",
-    "fileFolderName": "Holidays",
+    "fileType": "Holidays",
     "height": "100",
     "width": "100",
     "mimeType": "image/png",
@@ -398,7 +398,7 @@
   {
     "id": "1025",
     "parentId": "102",
-    "fileFolderName": "Holidays",
+    "fileType": "Holidays",
     "height": "100",
     "width": "100",
     "mimeType": "image/png",
@@ -412,7 +412,7 @@
   {
     "id": "1026",
     "parentId": "103",
-    "fileFolderName": "Wine",
+    "fileType": "Wine",
     "height": "100",
     "width": "100",
     "mimeType": "image/png",
@@ -426,7 +426,7 @@
   {
     "id": "1027",
     "parentId": "103",
-    "fileFolderName": "Wine",
+    "fileType": "Wine",
     "height": "100",
     "width": "100",
     "mimeType": "image/png",
@@ -440,7 +440,7 @@
   {
     "id": "1028",
     "parentId": "103",
-    "fileFolderName": "Wine",
+    "fileType": "Wine",
     "height": "100",
     "width": "100",
     "mimeType": "image/jpeg",
@@ -454,7 +454,7 @@
   {
     "id": "1029",
     "parentId": "103",
-    "fileFolderName": "Wine",
+    "fileType": "Wine",
     "height": "100",
     "width": "100",
     "mimeType": "image/jpeg",
@@ -468,7 +468,7 @@
   {
     "id": "1030",
     "parentId": "104",
-    "fileFolderName": "Wine",
+    "fileType": "Wine",
     "height": "100",
     "width": "100",
     "mimeType": "image/jpeg",
@@ -482,7 +482,7 @@
   {
     "id": "1031",
     "parentId": "100",
-    "fileFolderName": "Images",
+    "fileType": "Images",
     "height": "100",
     "width": "100",
     "mimeType": "image/jpeg",
@@ -496,7 +496,7 @@
   {
     "id": "1031",
     "parentId": "101",
-    "fileFolderName": "Food",
+    "fileType": "Food",
     "height": "100",
     "width": "100",
     "mimeType": "image/svg+xml",
@@ -510,7 +510,7 @@
   {
     "id": "1032",
     "parentId": "101",
-    "fileFolderName": "Food",
+    "fileType": "Food",
     "height": "100",
     "width": "100",
     "mimeType": "image/svg+xml",
@@ -524,7 +524,7 @@
   {
     "id": "1033",
     "parentId": "101",
-    "fileFolderName": "Food",
+    "fileType": "Food",
     "height": "100",
     "width": "100",
     "mimeType": "image/svg+xml",
@@ -538,7 +538,7 @@
   {
     "id": "1200",
     "parentId": "",
-    "fileFolderName": "PDF",
+    "fileType": "PDF",
     "mimeType": "application/pdf",
     "contentType": "pdf",
     "priority": 0,
@@ -550,7 +550,7 @@
   {
     "id": "1201",
     "parentId": "",
-    "fileFolderName": "PDF",
+    "fileType": "PDF",
     "mimeType": "application/pdf",
     "contentType": "pdf",
     "priority": 0,
@@ -562,7 +562,7 @@
   {
     "id": "1300",
     "parentId": "",
-    "fileFolderName": "Word",
+    "fileType": "Word",
     "mimeType": "application/vnd.openxmlformats-officedocument.wordprocessingml.document",
     "contentType": "textElement",
     "priority": 0,
@@ -574,7 +574,7 @@
   {
     "id": "1301",
     "parentId": "",
-    "fileFolderName": "Word",
+    "fileType": "Word",
     "mimeType": "application/vnd.openxmlformats-officedocument.wordprocessingml.document",
     "contentType": "textElement",
     "priority": 0,
@@ -586,7 +586,7 @@
   {
     "id": "1400",
     "parentId": "",
-    "fileFolderName": "Word",
+    "fileType": "Word",
     "mimeType": "application/vnd.openxmlformats-officedocument.wordprocessingml.document",
     "contentType": "emailElement",
     "priority": 0,
@@ -598,7 +598,7 @@
   {
     "id": "1401",
     "parentId": "",
-    "fileFolderName": "Word",
+    "fileType": "Word",
     "mimeType": "application/vnd.openxmlformats-officedocument.wordprocessingml.document",
     "contentType": "emailElement",
     "priority": 0,
@@ -610,7 +610,7 @@
   {
     "id": "1500",
     "parentId": "",
-    "fileFolderName": "PowerPoint",
+    "fileType": "PowerPoint",
     "mimeType": "application/vnd.openxmlformats-officedocument.presentationml.presentation",
     "contentType": "slide",
     "priority": 0,
@@ -622,7 +622,7 @@
   {
     "id": "1501",
     "parentId": "",
-    "fileFolderName": "PowerPoint",
+    "fileType": "PowerPoint",
     "mimeType": "application/vnd.openxmlformats-officedocument.presentationml.presentation",
     "contentType": "slide",
     "priority": 0,
@@ -634,7 +634,7 @@
   {
     "id": "1502",
     "parentId": "",
-    "fileFolderName": "PowerPoint",
+    "fileType": "PowerPoint",
     "mimeType": "application/vnd.openxmlformats-officedocument.presentationml.presentation",
     "contentType": "slide",
     "priority": 0,
@@ -646,7 +646,7 @@
   {
     "id": "1600",
     "parentId": "",
-    "fileFolderName": "PowerPoint",
+    "fileType": "PowerPoint",
     "mimeType": "application/vnd.openxmlformats-officedocument.presentationml.presentation",
     "contentType": "slideElement",
     "priority": 0,
@@ -658,7 +658,7 @@
   {
     "id": "1601",
     "parentId": "",
-    "fileFolderName": "PowerPoint",
+    "fileType": "PowerPoint",
     "mimeType": "application/vnd.openxmlformats-officedocument.presentationml.presentation",
     "contentType": "slideElement",
     "priority": 0,
@@ -670,7 +670,7 @@
   {
     "id": "1602",
     "parentId": "",
-    "fileFolderName": "PowerPoint",
+    "fileType": "PowerPoint",
     "mimeType": "application/vnd.openxmlformats-officedocument.presentationml.presentation",
     "contentType": "slideElement",
     "priority": 0,

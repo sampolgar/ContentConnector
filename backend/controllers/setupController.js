@@ -2,8 +2,6 @@ const asyncHandler = require("express-async-handler");
 const defaultContent = require("../../content/content.json");
 const db = require("../utils/db").getDB();
 const collection = db.collection(process.env.MONGO_COLLECTION);
-// import { defaultQueryNoFolder } from "../utils/defaultQueryNoFolder";
-const defaultQueryNoFolder = require("../utils/defaultQueryNoFolder");
 
 // @desc Create Content
 // @route POST /setup
