@@ -1,8 +1,8 @@
 [
   {
     "id": "100",
-    "parentId": "",
-    "fileType": "images",
+    "parentId": "0",
+    "fileType": "image",
     "mimeType": "application/vnd.templafy.folder",
     "contentType": "folder",
     "priority": 1,
@@ -14,7 +14,7 @@
   {
     "id": "101",
     "parentId": "100",
-    "fileType": "Food",
+    "fileType": "image",
     "mimeType": "application/vnd.templafy.folder",
     "contentType": "folder",
     "priority": 1,
@@ -26,7 +26,7 @@
   {
     "id": "102",
     "parentId": "100",
-    "fileType": "Holidays",
+    "fileType": "image",
     "mimeType": "application/vnd.templafy.folder",
     "contentType": "folder",
     "priority": 1,
@@ -38,7 +38,7 @@
   {
     "id": "103",
     "parentId": "100",
-    "fileType": "Wine",
+    "fileType": "image",
     "mimeType": "application/vnd.templafy.folder",
     "contentType": "folder",
     "priority": 1,
@@ -50,7 +50,7 @@
   {
     "id": "104",
     "parentId": "103",
-    "fileType": "Fine Wine",
+    "fileType": "image",
     "mimeType": "application/vnd.templafy.folder",
     "contentType": "folder",
     "priority": 1,

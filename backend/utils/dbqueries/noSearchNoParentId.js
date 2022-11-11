@@ -1,6 +1,8 @@
 //?skip=0&limit=30&contentType=image&parentId=
 
-const dbQueryNoSearchNoParentId = ({ skip, limit, contentType }) => {
+//get all content from the lowest parentid
+const makeQueryNoSearchNoParentId = ({ skip, limit, contentType }) => {
+  console.log("here1");
   skip = parseInt(skip);
   limit = parseInt(limit);
 
@@ -13,12 +15,15 @@ const dbQueryNoSearchNoParentId = ({ skip, limit, contentType }) => {
           },
           {
             contentType: "folder",
+            fileType: contentType,
           },
         ],
       },
     },
     {
       $group: {
+        _id: "$parentId",
+        minParentId: { $min: "$parentId" },
         _id: null,
         content: {
           $push: {
@@ -29,7 +34,7 @@ const dbQueryNoSearchNoParentId = ({ skip, limit, contentType }) => {
             tags: "$tags",
           },
         },
-        total: {
+        contentCount: {
           $sum: 1,
         },
       },
@@ -52,7 +57,7 @@ const dbQueryNoSearchNoParentId = ({ skip, limit, contentType }) => {
       $project: {
         _id: 0,
         content: 1,
-        total: 1,
+        contentCount: 1,
         skip: 1,
         limit: 1,
       },
@@ -60,4 +65,44 @@ const dbQueryNoSearchNoParentId = ({ skip, limit, contentType }) => {
   ];
 };
 
-module.exports = dbQueryNoSearchNoParentId;
+
+
+// get the lowest parentId
+const getParentIdQueryNoSearchNoParentId = ({ contentType }) => {
+  console.log("here2");
+  return [
+    {
+      $match: {
+        contentType: "folder",
+        fileType: contentType,
+      },
+    },
+    {
+      $group: {
+        _id: "$parentId",
+        minParentId: { $min: "$parentId" },
+        _id: null,
+        content: {
+          $push: {
+            id: "$id",
+            mimeType: "$mimeType",
+            name: "$name",
+            previewUrl: "$previewUrl",
+            tags: "$tags",
+          },
+        },
+      },
+    },
+    {
+      $project: {
+        _id: 0,
+        minParentId: "$minParentId",
+      },
+    },
+  ];
+};
+
+module.exports = {
+  makeQueryNoSearchNoParentId,
+  getParentIdQueryNoSearchNoParentId,
+};

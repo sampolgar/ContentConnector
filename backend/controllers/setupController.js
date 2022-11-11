@@ -77,14 +77,14 @@ const deleteAllContentHandler = async () => {
 // @for testing queries
 const testQuery = asyncHandler(async (req, res) => {
   //test query
-  const dbQuery = await defaultQueryNoFolder(req.params);
-  const dbResult = await collection.aggregate(dbQuery).toArray();
-  res.status(200).json({ message: dbResult });
+  // const dbQuery = await defaultQueryNoFolder(req.params);
+  // const dbResult = await collection.aggregate(dbQuery).toArray();
+  // res.status(200).json({ message: dbResult });
 
-  // const cursor = collection.aggregate(req.body);
-  // await cursor.forEach((docs) => {
-  //   console.log(docs);
-  // });
+  const cursor = collection.aggregate(req.body);
+  await cursor.forEach((docs) => {
+    console.log(docs);
+  });
 });
 
 const respondToClient = (res, httpCode, message) => {

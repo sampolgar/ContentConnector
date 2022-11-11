@@ -9,8 +9,8 @@ const { errorHandler } = require("./middleware/errorMiddleware");
 connectDB().then(() => {
   //start express
   const app = express();
-  app.use(express.json());
   app.use(express.urlencoded({ extended: false }));
+  app.use(express.json({ extended: true }));
   app.use(errorHandler); //this will override default error handler
   app.listen(port, () => console.log(`Server running on port ${port}`));
 
