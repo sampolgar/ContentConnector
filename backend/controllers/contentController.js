@@ -14,6 +14,10 @@ const {
   yesSearchNoParentId,
 } = require("../utils/dbQueries/yesSearchNoParentId");
 
+const {
+  yesSearchYesParentId,
+} = require("../utils/dbQueries/yesSearchYesParentId");
+
 const getContent = asyncHandler(async (req, res) => {
   console.log(JSON.stringify(req.query));
   console.log("req.url ", JSON.stringify(req.originalUrl));
@@ -38,13 +42,14 @@ const formDbQueryFromQueryParams = async (queryParams) => {
   const { parentId, search } = queryParams;
 
   if (!search && !parentId) {
+    //use the handler to handle the 3 differnt scenarios
     return await noSearchNoParentIdQueryHandler(queryParams);
   } else if (!search && parentId) {
     return await noSearchYesParentId(queryParams);
   } else if (search && !parentId) {
     return await yesSearchNoParentId(queryParams);
   } else if (search && parentId) {
-    console.log("search: " + search + " parentId: " + parentId);
+    return await yesSearchYesParentId(queryParams);
   }
 };
 
@@ -64,18 +69,8 @@ const noSearchNoParentIdQueryHandler = async (queryParams) => {
   queryParams.parentId = parentIdResult[0].minParentId;
 
   // because this is now a request with a parentId, we'll use the parentId query (query 2)
-  return await noSearchYesParentIdHandler(queryParams);
+  return await noSearchYesParentId(queryParams);
 };
-
-// const noSearchYesParentIdHandler = async (queryParams) => {
-//   //get the db query from noSearchNoParentId.js
-//   return await noSearchYesParentId(queryParams);
-// };
-
-// const yesSearchNoParentIdHandler = async (queryParams) => {
-//   //get the db query from yesSearchNoParentId.js
-//   return await yesSearchNoParentId(queryParams);
-// };
 
 const queryMongoDB = async (query) => {
   try {

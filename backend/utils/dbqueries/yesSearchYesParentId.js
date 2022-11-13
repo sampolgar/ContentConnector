@@ -1,4 +1,10 @@
-const yesSearchYesParentId = ({ skip, limit, contentType, search }) => {
+const yesSearchYesParentId = ({
+  skip,
+  limit,
+  contentType,
+  search,
+  parentId,
+}) => {
   skip = parseInt(skip);
   limit = parseInt(limit);
   return [
@@ -18,6 +24,12 @@ const yesSearchYesParentId = ({ skip, limit, contentType, search }) => {
               text: {
                 query: contentType,
                 path: "contentType",
+              },
+            },
+            {
+              text: {
+                query: parentId,
+                path: "parentId",
               },
             },
           ],
