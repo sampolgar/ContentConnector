@@ -2,22 +2,13 @@
 
 //get all content from the lowest parentid
 const makeQueryNoSearchNoParentId = ({ skip, limit, contentType }) => {
-  console.log("here1");
   skip = parseInt(skip);
   limit = parseInt(limit);
 
   return [
     {
       $match: {
-        $or: [
-          {
-            contentType: contentType,
-          },
-          {
-            contentType: "folder",
-            fileType: contentType,
-          },
-        ],
+        contentType: contentType,
       },
     },
     {
@@ -65,9 +56,8 @@ const makeQueryNoSearchNoParentId = ({ skip, limit, contentType }) => {
   ];
 };
 
-
-
 // get the lowest parentId
+// this is only needed if there is a folder hierarchy
 const getParentIdQueryNoSearchNoParentId = ({ contentType }) => {
   console.log("here2");
   return [

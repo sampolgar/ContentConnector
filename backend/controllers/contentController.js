@@ -65,11 +65,14 @@ const noSearchNoParentIdQueryHandler = async (queryParams) => {
   //then query the database to get the lowest parentid folder
   const parentIdResult = await collection.aggregate(dbQuery).toArray();
 
-  //Add the lowest parentId folder to the queryParams object
-  queryParams.parentId = parentIdResult[0].minParentId;
-
-  // because this is now a request with a parentId, we'll use the parentId query (query 2)
-  return await noSearchYesParentId(queryParams);
+  //if there is a parentId then we are in scenario 2 or 3
+  if (parentIdResult[0]) {
+    queryParams.parentId = parentIdResult[0].minParentId;
+    return await noSearchYesParentId(queryParams);
+    //if there is no parentId then we are in scenario 1
+  } else {
+    return await makeQueryNoSearchNoParentId(queryParams);
+  }
 };
 
 const queryMongoDB = async (query) => {
