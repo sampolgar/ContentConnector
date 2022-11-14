@@ -1,7 +1,7 @@
 //?skip=0&limit=30&contentType=image&parentId=
 
 //get all content from the lowest parentid
-const makeQueryNoSearchNoParentId = ({ skip, limit, contentType }) => {
+const noSearchNoParentId = ({ skip, limit, contentType }) => {
   skip = parseInt(skip);
   limit = parseInt(limit);
 
@@ -93,6 +93,6 @@ const getParentIdQueryNoSearchNoParentId = ({ contentType }) => {
 };
 
 module.exports = {
-  makeQueryNoSearchNoParentId,
+  noSearchNoParentId,
   getParentIdQueryNoSearchNoParentId,
 };

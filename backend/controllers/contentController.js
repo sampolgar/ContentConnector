@@ -3,7 +3,7 @@ const db = require("../utils/db").getDB();
 const collection = db.collection(process.env.MONGO_COLLECTION);
 //importing db queries
 const {
-  makeQueryNoSearchNoParentId,
+  noSearchNoParentId,
   getParentIdQueryNoSearchNoParentId,
 } = require("../utils/dbQueries/noSearchNoParentId");
 const {
@@ -19,8 +19,8 @@ const {
 } = require("../utils/dbQueries/yesSearchYesParentId");
 
 const getContent = asyncHandler(async (req, res) => {
-  console.log(JSON.stringify(req.query));
-  console.log("req.url ", JSON.stringify(req.originalUrl));
+  console.log("req query params", JSON.stringify(req.query));
+  // console.log("req.url ", JSON.stringify(req.originalUrl));
 
   //get the relevent db query
   const dbQuery = await formDbQueryFromQueryParams(req.query);
@@ -71,9 +71,21 @@ const noSearchNoParentIdQueryHandler = async (queryParams) => {
     return await noSearchYesParentId(queryParams);
     //if there is no parentId then we are in scenario 1
   } else {
-    return await makeQueryNoSearchNoParentId(queryParams);
+    return await noSearchNoParentId(queryParams);
   }
 };
+
+const getDownload = asyncHandler(async (req, res) => {
+  //get the download url from the database for a given content id
+  let downloadObj = {};
+  const findDownloadObject = await collection.findOne({ id: req.params.id });
+  if (findDownloadObject) {
+    downloadObj.downloadUrl = findDownloadObject.downloadUrl;
+    respondToClient(res, 200, downloadObj);
+  } else {
+    respondToClient(res, 400, "content not found");
+  }
+});
 
 const queryMongoDB = async (query) => {
   try {
@@ -86,10 +98,12 @@ const queryMongoDB = async (query) => {
 };
 
 const respondToClient = (res, httpCode, message) => {
-  res.status(httpCode).json(message[0]);
+  if (Array.isArray(message)) {
+    res.status(httpCode).json(message[0]);
+  } else {
+    res.status(httpCode).json(message);
+  }
 };
-
-const getDownload = asyncHandler(async (req, res) => {});
 
 module.exports = {
   getContent,
