@@ -6,6 +6,7 @@ const {
   noSearchNoParentId,
   getParentIdQueryNoSearchNoParentId,
 } = require("../utils/dbQueries/noSearchNoParentId");
+
 const {
   noSearchYesParentId,
 } = require("../utils/dbQueries/noSearchYesParentId");
@@ -18,9 +19,8 @@ const {
   yesSearchYesParentId,
 } = require("../utils/dbQueries/yesSearchYesParentId");
 
+
 const getContent = asyncHandler(async (req, res) => {
-  console.log("req query params", JSON.stringify(req.query));
-  // console.log("req.url ", JSON.stringify(req.originalUrl));
 
   //get the relevent db query
   const dbQuery = await formDbQueryFromQueryParams(req.query);
@@ -59,19 +59,17 @@ const formDbQueryFromQueryParams = async (queryParams) => {
 //3. the content system has both folders and images at the root level and wants to return both (like a computer file system)
 //
 const noSearchNoParentIdQueryHandler = async (queryParams) => {
-  //first get the dbQuery
+  //to know which scenario we are in, we test if there is a parentId in the db search we're doing
   const dbQuery = await getParentIdQueryNoSearchNoParentId(queryParams);
-
-  //then query the database to get the lowest parentid folder
   const parentIdResult = await collection.aggregate(dbQuery).toArray();
 
-  //if there is a parentId then we are in scenario 2 or 3
-  if (parentIdResult[0]) {
+  //if there is no parentId then we are in scenario 1
+  if (!parentIdResult[0]) {
+    return await noSearchNoParentId(queryParams);
+  } else {
+    //if there is a parentId then we are in scenario 2 or 3
     queryParams.parentId = parentIdResult[0].minParentId;
     return await noSearchYesParentId(queryParams);
-    //if there is no parentId then we are in scenario 1
-  } else {
-    return await noSearchNoParentId(queryParams);
   }
 };
 

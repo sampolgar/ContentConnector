@@ -59,7 +59,6 @@ const noSearchNoParentId = ({ skip, limit, contentType }) => {
 // get the lowest parentId
 // this is only needed if there is a folder hierarchy
 const getParentIdQueryNoSearchNoParentId = ({ contentType }) => {
-  console.log("here2");
   return [
     {
       $match: {
