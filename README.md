@@ -16,7 +16,6 @@ You can deploy this template as is and learn how it functions with Templafy, or 
 
 ## Why use a Content Connector?
 
-Efficency, 
 In this example, the end-user is in PowerPoint and finds their content within the application. With 1 click they can insert additional slides and insert images directly into content controls with automatic cropping.
 
 https://user-images.githubusercontent.com/39210767/197703163-46b293e1-e7ef-434a-a422-ee4b548630c3.mp4
