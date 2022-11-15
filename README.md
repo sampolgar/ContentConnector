@@ -142,7 +142,7 @@ HTTP 401 Unauthorized
 <details><summary> GET /content</summary>
   <p>
 
-**Query Parameters for GET /content
+**Query Parameters for GET /content**
 
 | Query Parameter | Type    | Description                                                                                                                                                          |
 | --------------- | ------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
@@ -152,9 +152,9 @@ HTTP 401 Unauthorized
 | `parentId`      | String  | Enables the folder structure in Templafy. When an end-user selects a folder in the interface, Templafy requests all content from the folder using its `parentId`     |
 | `search`        | String  | Enables an end-user to search through your content. We recommend searching names and tags                                                                            |
 
-**Valid request
+**Valid request**
 
-```
+```shell
 curl X GET \
 -H "authorization":"Bearer fake_access_token" \
 -H "x-templafyuser":"spo@templafy.com" \
@@ -162,7 +162,7 @@ curl X GET \
 "https://contentconnector.io/content/?skip=0&limit=30&contentType=image&parentId=101"
 ```
 
-**Response Body for GET /content
+**Response Body for GET /content**
 
 | Body Key        | Value Type | Description                                                                                                                                                                                   | Example                                                                                                                                                                                                                                                  |
 | --------------- | ---------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
@@ -175,9 +175,9 @@ curl X GET \
 | `previewUrl`    | String     | Public image link to preview content in Templafy. For PowerPoint, Word, & PDF please choose a content preview or use an icon for Templafy to render to the end-user. Not required for folders | `"previewUrl":"htpps://contractpdf.jpg"`                                                                                                                                                                                                                 |
 | `tags`          | String     | Content tags to support searching. Not required for folders                                                                                                                                   | `"tags":"Wine, Restaurants, Burgundy"`                                                                                                                                                                                                                   |
 
-**Valid response
+**Valid response**
 
-```bash
+```shell
 HTTP 200 OK
 {
    "contentCount": 3,
@@ -214,7 +214,7 @@ HTTP 200 OK
 }
 ```
 
-**Examples
+**Examples**
 
 - /content/?skip=0&limit=30&contentType=slides
 - /content/?skip=0&limit=30&contentType=image&parentId=01
