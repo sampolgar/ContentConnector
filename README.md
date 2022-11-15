@@ -11,8 +11,8 @@ You can deploy this template as is and learn how it functions with Templafy, or 
 ## Table of contents
 
 - [Instructions](#Instructions)
+- [Content and Folder Structure](#Content-and-Folder-Structure)
 - [API Routes](#API-Routes)
-- [Use Cases](#Use-Cases)
 
 ## Why use a Content Connector?
 
@@ -100,17 +100,40 @@ The following postman tests should retreive results
 3. Navigate to the user interface https://tenant.templafy.com, find the connector in the library panel and view the folders and images
 
 ## Limitations
+- Page limit set to 30
 
-# Further details
-## API Routes
+# Content and Folder Structure
 
-1. POST /oauth/token
-2. GET /content
-3. GET /content/{contentId}/download-url
+The content connector can return all content, a folder structure, or both. It's upto the (the customer requirements) & the engineer configuring this Template to decide what to return. 3 scenarios we see are
+1. Nested folder structure required
+2. No folders, display all content
+3. Search
 
+## General request timeline
+### 1. https://contentconnector/content/?skip=0&limit=30&contentType=image
+### 2. https://contentconnector/content/?skip=0&limit=30&contentType=image&parentId=100%2f103
+### 3. https://contentconnector/content/?skip=0&limit=30&contentType=image&parentId=100%2f103&search=wine
+
+## 1. Nested folder structure required
+- When Templafy sends `?skip=0&limit=30&contentType=image`, respond with the parent folders
+- When the user selects a parent folder, Templafy will send that in the next request. That's the cue to navigate down the folder path `?skip=0&limit=30&contentType=image&parentId=100/103`
+- Return all subfolders and content within the selected parent
+
+## 2. No folders, display all content
+- When Templafy sends `?skip=0&limit=30&contentType=image`, respond with all images in your system
+- As the user scrolls down the page, pagination will continue to skip results `?skip=30&limit=30&contentType=image`
+
+## 3. Search
+Some clients want search to search the entire content base or only to search a subfolder
+**Entire content base **
+- `?skip=0&limit=30&contentType=image&parentId=100%2f103&search=wine` find the search query param, disregard folder structure and search for the item
+- `?skip=0&limit=30&contentType=image&parentId=100%2f103&search=wine` find the search query param and only search in the subfolder 103
+
+# API Routes
+Below you'll find sample requests from Templafy and corresponding responses required
 <details><summary>POST /oauth/token</summary>
   <p>
-    **Valid request**
+**Valid request**
 
 ```shell
 curl -X POST \
