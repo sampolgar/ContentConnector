@@ -30,6 +30,11 @@ https://user-images.githubusercontent.com/39210767/197703163-46b293e1-e7ef-434a-
 
 # Instructions
 ## Overview
+[Detailed in our knowledge base](https://support.templafy.com/hc/en-us/articles/4688349602077-How-to-build-a-Custom-Content-Connector-API-), Templafy needs the following 3 endpoints supported
+
+1. POST /oauth/token
+2. GET /content
+3. GET /content/{contentId}/download-url
 
 - [Setup MongoDB](#MongoDB)
 - [Setup the Server](#Server)
@@ -50,34 +55,49 @@ https://user-images.githubusercontent.com/39210767/197703163-46b293e1-e7ef-434a-
 1. create a directory for the project on your computer
 2. run git clone `https://github.com/sampolgar/ContentConnector.git`
 3. open the folder in your text editor e.g. vscode
-4. rename the `.env-sample` file to `.env` and replace the sample MONGO_URI with the URI from step 5 above. Note: change the `<password>` to your mongodb password
+4. rename the `.env-sample` file to `.env` and replace the sample MONGO_URI with the URI from step 5 above
 5. run `npm install`
 6. run `npm run server`
 7. Your server should be running on `http://localhost:5000` and you should be connected to the database
 
 ## Testing with Postman & Adding Content to DB
 
-1. Add [my Postman collection](https://www.getpostman.com/collections/ac22205c7b33e7aefa04) to your Postman
-2. Use the `1. POST new content to the DB` to add the test content to the database. You can test its there with the 2nd postman request
+1. Add [my Postman collection](https://www.getpostman.com/collections/ac22205c7b33e7aefa04) to your Postman collections [details here](https://learning.postman.com/docs/getting-started/importing-and-exporting-data/#importing-postman-data)
+2. Use the `1. POST new content to the DB` to add the test content to the database. You can test its there with the 2nd postman request and delete with the 3rd
 
 ## Create MongoDB Index
 
-The index will enable our Content Connector to search for names and tags. e.g. when the user searches "food", MongoDB finds all content with names/tags with food or Food or fooderati
+The index will enable our Content Connector to search for names and tags. e.g. when the user searches "food", MongoDB finds all content with names/tags with food or Food or fooderati.
+Note: Index must be create after adding content to the database
 
 1. in mongodb atlas, click on your database, then browse collection
 2. click on `search` > `create index`
 3. `json editor` > keep defaults & ensure `"dynamic": true` and index name is `default`
 4. create
 
-## Testing with Postman
+## Test Locally
+The following postman tests should retreive results
+1.  POST http://localhost:5000/oauth/token
+2.  GET http://localhost:5000/content/?skip=0&limit=30&contentType=pdf
+3.  GET http://localhost:5000/content/?skip=0&limit=30&contentType=image&parentId=100%2f103
+4.  GET http://localhost:5000/content/1003/download-url
+
+## Test Online
+1. install [ngrok](https://ngrok.com/)
+2. run setup instructions from [ngrok](https://ngrok.com/)
+3. run `ngrok http 3000`
+4. copy the https url
+5. Retest the above local tests with the Ngrok URL
+
+## Configure in Templafy
+1. Login to Templafy as an admin https://tenant.templafy.com/admin, browse to the Integrations and setup a custom connector. If you don't have access, ask your Templafy account manager
+2. Enter the https url from ngrok, the client id and client secret can be anything. Click save
+3. Navigate to the user interface https://tenant.templafy.com, find the connector in the library panel and view the folders and images
 
 ## Limitations
 
-## How does the template work?
-
-[Detailed in our knowledge base](https://support.templafy.com/hc/en-us/articles/4688349602077-How-to-build-a-Custom-Content-Connector-API-), Templafy needs the following 3 endpoints supported. This template includes the content format and required requests and responses to fully support its function.
-
-# API Routes
+# Further details
+## API Routes
 
 1. POST /oauth/token
 2. GET /content
