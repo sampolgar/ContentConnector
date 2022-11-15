@@ -1,18 +1,18 @@
 # Content Connector Modern
 
-## Table of contents
-
-- [Introduction](#Introduction)
-- [Instructions](#Instructions)
-- [API Routes](#API-Routes)
-- [Use Cases](#Use-Cases)
-
-# Introduction
+## Introduction
 
 This template demonstrates how any developer can setup the Templafy Content Connector, it includes sample content and required API route handling.
 You can deploy this template as is and learn how it functions with Templafy, or you can use it as a base and replace MongoDB queries with your needs.
 
 [Templafy's Content Connector](https://support.templafy.com/hc/en-us/articles/4688349602077-How-to-build-a-Custom-Content-Connector-API-) is a server that receives requests from Templafy and responds with data/content to be displayed in the Templafy interface. This template is a sample server to help you learn how it works and how to configure it with Templafy.
+
+
+## Table of contents
+
+- [Instructions](#Instructions)
+- [API Routes](#API-Routes)
+- [Use Cases](#Use-Cases)
 
 ## Why use a Content Connector?
 
@@ -35,7 +35,7 @@ https://user-images.githubusercontent.com/39210767/197703163-46b293e1-e7ef-434a-
 2. GET /content
 3. GET /content/{contentId}/download-url
 
-## Overview
+## Summary
 
 - [Setup MongoDB](#MongoDB)
 - [Setup the Server](#Server)
@@ -108,9 +108,9 @@ The following postman tests should retreive results
 2. GET /content
 3. GET /content/{contentId}/download-url
 
-## POST /oauth/token
-
-### Request
+<details><summary>POST /oauth/token</summary>
+  <p>
+    ### Request
 
 ```shell
 curl -X POST \
@@ -137,6 +137,11 @@ HTTP 200 OK
 ```json
 HTTP 401 Unauthorized
 ```
+  </p>
+</details>
+## POST /oauth/token
+
+
 
 ## GET /content
 
