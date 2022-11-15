@@ -126,14 +126,14 @@ curl -X POST \
 
 **Valid response**
 
-```json
+```shell
 HTTP 200 OK
 { "access_token": "fake_access_token" }
 ```
 
 **Valid response. If the token times out, send a 401 and Templafy will request a new OAuth**
 
-```json
+```shell
 HTTP 401 Unauthorized
 ```
   </p>
@@ -224,11 +224,12 @@ HTTP 200 OK
   </p>
 </details>
 
-## GET /content/{contentId}/download-url
+<details><summary>GET /content/{contentId}/download-url</summary>
+  <p>
 
-### Request
+**Request**
 
-```
+```shell
 curl X GET \
 -H "authorization":"Bearer fake_access_token" \
 -H "x-templafyuser":"spo@templafy.com" \
@@ -236,33 +237,12 @@ curl X GET \
 "https://contentconnector.io/content/1500/download-url"
 ```
 
-### Response
+**Response**
 
-```json
+```shell
 HTTP 200 OK
 { "downloadUrl": "https://imagelink.com/pre-signed-url-for-this-image.png" }
 ```
+  </p>
+</details>
 
-# Getting Started
-
-## Setup Mongodb Atlas
-
-### Environment Variables
-
-```
-NODE_ENV = development
-PORT = 5000
-MONGO_URI = mongodb+srv://MONGODB:MONGODBPASSWORD]@cluster0.gahkhen.mongodb.net/?retryWrites=true&w=majority
-```
-
-### Add Content
-
-### Test Content
-
-## Setup Templafy
-
-# Use-cases
-
-# Limitations
-
-# Database queries
