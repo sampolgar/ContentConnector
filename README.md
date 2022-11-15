@@ -112,7 +112,7 @@ The following postman tests should retreive results
 
 ### Request
 
-```curl
+```shell
 curl -X POST \
   -H "content-type":"application/x-www-form-urlencoded"
   -H "x-templafyuser":"spo@templafy.com" \
