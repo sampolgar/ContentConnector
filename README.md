@@ -29,19 +29,24 @@ https://user-images.githubusercontent.com/39210767/197703163-46b293e1-e7ef-434a-
 - JavaScript/NodeJS/npm/express.js
 
 # Instructions
-## Overview
 [Detailed in our knowledge base](https://support.templafy.com/hc/en-us/articles/4688349602077-How-to-build-a-Custom-Content-Connector-API-), Templafy needs the following 3 endpoints supported
 
 1. POST /oauth/token
 2. GET /content
 3. GET /content/{contentId}/download-url
 
+## Overview
+
 - [Setup MongoDB](#MongoDB)
 - [Setup the Server](#Server)
 - [API Routes](#API-Routes)
 - [Testing with Postman & Adding Content to DB](#Testing-with-Postman-&-Adding-Content-to-DB)
 - [Create MongoDB Index](#Create-MongoDB-Index)
-- [Use Ngrok to make your localhost public](#Use Ngrok to make your localhost public)
+- [Use Ngrok to make your localhost public](#Use-Ngrok-to-make-your-localhost-public)
+- [Create MongoDB Index](#Create-MongoDB-Index)
+- [Test Locally](#Test-Locally)
+- [Test Online](#Test-Online)
+- [Configure in Templafy](#Configure-in-Templafy)
 
 ## MongoDB 
 
@@ -256,27 +261,3 @@ MONGO_URI = mongodb+srv://MONGODB:MONGODBPASSWORD]@cluster0.gahkhen.mongodb.net/
 # Limitations
 
 # Database queries
-
-```
-db.things.find({
-    $and: [
-        {
-            $or: [
-                {"first_name": "john"},
-                {"last_name": "john"}
-            ]
-        },
-        {
-            "Phone": "12345678"
-        }
-    ]
-})
-```
-
-```
-{
-//   $and: [{ parentId: "103" },{ contentType: "image" }],
-//   $or: [{parentId: "103"}],
-//   $text: { $search: "*Burgundy*" },
-// }
-```
