@@ -110,7 +110,7 @@ The following postman tests should retreive results
 
 <details><summary>POST /oauth/token</summary>
   <p>
-    ### Request
+    **Valid request**
 
 ```shell
 curl -X POST \
@@ -123,7 +123,6 @@ curl -X POST \
   "https://contentconnector.io/oauth/token"
 ```
 
-### Response
 
 **Valid response**
 
@@ -139,13 +138,11 @@ HTTP 401 Unauthorized
 ```
   </p>
 </details>
-## POST /oauth/token
 
+<details><summary> GET /content</summary>
+  <p>
 
-
-## GET /content
-
-### Query Parameters for GET /content
+**Query Parameters for GET /content
 
 | Query Parameter | Type    | Description                                                                                                                                                          |
 | --------------- | ------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
@@ -155,7 +152,7 @@ HTTP 401 Unauthorized
 | `parentId`      | String  | Enables the folder structure in Templafy. When an end-user selects a folder in the interface, Templafy requests all content from the folder using its `parentId`     |
 | `search`        | String  | Enables an end-user to search through your content. We recommend searching names and tags                                                                            |
 
-### Request
+**Valid request
 
 ```
 curl X GET \
@@ -165,7 +162,7 @@ curl X GET \
 "https://contentconnector.io/content/?skip=0&limit=30&contentType=image&parentId=101"
 ```
 
-### Response Body for GET /content
+**Response Body for GET /content
 
 | Body Key        | Value Type | Description                                                                                                                                                                                   | Example                                                                                                                                                                                                                                                  |
 | --------------- | ---------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
@@ -178,9 +175,9 @@ curl X GET \
 | `previewUrl`    | String     | Public image link to preview content in Templafy. For PowerPoint, Word, & PDF please choose a content preview or use an icon for Templafy to render to the end-user. Not required for folders | `"previewUrl":"htpps://contractpdf.jpg"`                                                                                                                                                                                                                 |
 | `tags`          | String     | Content tags to support searching. Not required for folders                                                                                                                                   | `"tags":"Wine, Restaurants, Burgundy"`                                                                                                                                                                                                                   |
 
-### Response
+**Valid response
 
-```json
+```bash
 HTTP 200 OK
 {
    "contentCount": 3,
@@ -217,12 +214,15 @@ HTTP 200 OK
 }
 ```
 
-#### Examples
+**Examples
 
 - /content/?skip=0&limit=30&contentType=slides
 - /content/?skip=0&limit=30&contentType=image&parentId=01
 - /content/?skip=0&limit=30&contentType=image&parentId=01%2f02
 - /content/?skip=0&limit=30&contentType=pdf&parentId=01%2f02&search=possum
+
+  </p>
+</details>
 
 ## GET /content/{contentId}/download-url
 
