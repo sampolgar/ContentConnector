@@ -2,17 +2,21 @@
 
 ## Table of contents
 
-- [Intro](#Intro)
+- [Introduction](#Introduction)
 - [Instructions](#Instructions)
 - [API Routes](#API-Routes)
 - [Use Cases](#Use-Cases)
 
-# Intro
+# Introduction
+
+This template demonstrates how any developer can setup the Templafy Content Connector, it includes sample content and required API route handling.
+You can deploy this template as is and learn how it functions with Templafy, or you can use it as a base and replace MongoDB queries with your needs.
 
 [Templafy's Content Connector](https://support.templafy.com/hc/en-us/articles/4688349602077-How-to-build-a-Custom-Content-Connector-API-) is a server that receives requests from Templafy and responds with data/content to be displayed in the Templafy interface. This template is a sample server to help you learn how it works and how to configure it with Templafy.
 
-## Why customers need a Content Connector
+## Why use a Content Connector?
 
+Efficency, 
 In this example, the end-user is in PowerPoint and finds their content within the application. With 1 click they can insert additional slides and insert images directly into content controls with automatic cropping.
 
 https://user-images.githubusercontent.com/39210767/197703163-46b293e1-e7ef-434a-a422-ee4b548630c3.mp4
@@ -25,20 +29,23 @@ https://user-images.githubusercontent.com/39210767/197703163-46b293e1-e7ef-434a-
 - JavaScript/NodeJS/npm/express.js
 
 # Instructions
+## Overview
 
-## Create MongoDB
+- [Setup MongoDB](#MongoDB)
+- [Setup the Server](#Server)
+- [API Routes](#API-Routes)
+- [Testing with Postman & Adding Content to DB](#Testing-with-Postman-&-Adding-Content-to-DB)
+- [Create MongoDB Index](#Create-MongoDB-Index)
+- [Use Ngrok to make your localhost public](#Use Ngrok to make your localhost public)
 
-MongoDB is a cloud hosted nosql database, great for working with NodeJS.
+## MongoDB 
 
-1. create an account on [mongodb atlas](https://mongodb.com/) - select the free tier shared
-2. create a username and password, you'll need to use this below
-3. set the Network Access to your IP address or All IP addresses - use 0.0.0.0/0
-4. You should now see your Cluster0
-5. Click Connect and MongoDB Drivers and copy the connection string `mongodb+srv://contentconnector:<password>@cluster0.6j5j1zz.mongodb.net/?retryWrites=true&w=majority`
+1. Setup MongoDB - [follow these instructions](https://www.mongodb.com/docs/atlas/getting-started/)
+2. Ensure your IP address is whitelisted, for all IP addresses - use 0.0.0.0/0 
+3. Click Connect and MongoDB Drivers and copy the connection string `mongodb+srv://contentconnector:<password>@cluster0.6j5j1zz.mongodb.net/?retryWrites=true&w=majority`
+4. change `contentconnector:<password>` with your username/password
 
 ## Server
-
-Setup the server
 
 1. create a directory for the project on your computer
 2. run git clone `https://github.com/sampolgar/ContentConnector.git`
@@ -46,20 +53,12 @@ Setup the server
 4. rename the `.env-sample` file to `.env` and replace the sample MONGO_URI with the URI from step 5 above. Note: change the `<password>` to your mongodb password
 5. run `npm install`
 6. run `npm run server`
-7. Your server should be running on `http://localhost:5000`
+7. Your server should be running on `http://localhost:5000` and you should be connected to the database
 
 ## Testing with Postman & Adding Content to DB
 
-Todo
-
-- [ ] make routes for `http://localhost:5000/mongodb/postContent
-- [ ] make routes for `http://localhost:5000/mongodb/makeIndex
-- [ ] make route for getting all content
-
-1. Open Postman and create a new POST request to `http://localhost:5000/content`. Set the body to Raw and change the format to JSON
-2. Copy and paste the content array ContentConnector/content/content.json in the body and send it
-3. The log in Postman should say `"success": "new documents added!"` with the data.
-4. You can test this by going back to the MongoDB website and clicking "Browse Collections" - you should see your contents in the database
+1. Add [my Postman collection](https://www.getpostman.com/collections/ac22205c7b33e7aefa04) to your Postman
+2. Use the `1. POST new content to the DB` to add the test content to the database. You can test its there with the 2nd postman request
 
 ## Create MongoDB Index
 
