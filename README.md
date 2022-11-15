@@ -110,9 +110,10 @@ The content connector can return all content, a folder structure, or both. It's 
 3. Search
 
 ## General request timeline
-### 1. https://contentconnector/content/?skip=0&limit=30&contentType=image
-### 2. https://contentconnector/content/?skip=0&limit=30&contentType=image&parentId=100%2f103
-### 3. https://contentconnector/content/?skip=0&limit=30&contentType=image&parentId=100%2f103&search=wine
+The 3 scenarios are enabled by interpreting the requests. Here's a timeline as a user navigates through the library
+1. https://contentconnector/content/?skip=0&limit=30&contentType=image
+2. https://contentconnector/content/?skip=0&limit=30&contentType=image&parentId=100%2f103
+3. https://contentconnector/content/?skip=0&limit=30&contentType=image&parentId=100%2f103&search=wine
 
 ## 1. Nested folder structure required
 - When Templafy sends `?skip=0&limit=30&contentType=image`, respond with the parent folders
